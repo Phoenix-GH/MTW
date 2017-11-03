@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.SettingsPage" Title = "Settings" 
+	xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld" 
+	xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72" VerticalOptions="Start">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand" Text="Setup">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="SaveData" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="DONE" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+            <StackLayout VerticalOptions="Start">
+                <Grid BackgroundColor="White">
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <Button  x:Name="infoPageButton" HorizontalOptions="Fill" Text="INFO" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="InfoPage" TextColor="#E84D3D"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barInfo" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="facilitiesPageButton"  HorizontalOptions="Fill" Text="FACILITIES" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="FacilityPage" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barFacilities" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="committePageButton" HorizontalOptions="Fill" Text="COMMITTEE" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="CommittePage" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barCommittee" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="3">
+                        <Button x:Name="customisationPageButton" HorizontalOptions="Fill" Text="CUSTOMIZATION" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="CustomizationPage" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barCustomization" IsVisible="false"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+    		
+			<controls:CarouselViewControl x:Name="carouselView" Position="0" Orientation="Horizontal" InterPageSpacing="10" 
+				HorizontalOptions="Fill" IsSwipingEnabled="false" HeightRequest="700" VerticalOptions="FillAndExpand">
+			</controls:CarouselViewControl>
+        </StackLayout>
+	 </ContentPage.Content>
+</ContentPage>

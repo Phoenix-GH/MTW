@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.ProfileInfoView"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+	x:Name="ProfileInfoPage">
+	<ContentView.Content>
+		<ScrollView VerticalOptions="Fill">
+			<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Fill" WidthRequest="193">
+					<Image VerticalOptions="Start" WidthRequest="75" HeightRequest="75" x:Name="logoImage" Source="{Binding Source={x:Reference ProfileInfoPage}, Path=portfolioLogo}" HorizontalOptions="Center" />
+                    <Button BackgroundColor="#99C259" WidthRequest="105" HeightRequest="35" BorderRadius="3" TextColor="White" FontSize="10" Text="CHANGE IMAGE" Clicked="ChangeLogo" Margin="0, 20, 0, 0" HorizontalOptions="Center" >
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+				</StackLayout>
+				<Grid x:Name="grid" HorizontalOptions="FillAndExpand" ColumnSpacing="28" Margin="0, 0, 43, 0" RowSpacing="30">
+					<Grid.RowDefinitions>
+					    <RowDefinition Height="Auto" />
+					    <RowDefinition Height="Auto" />
+					    <RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+						<Image HorizontalOptions="Fill" x:Name="largeImage" HeightRequest="200" Source="{Binding Source={x:Reference ProfileInfoPage}, Path=image}"/>
+                        <Button BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" BorderRadius="3" FontSize="10" TextColor="White" Text="CHANGE WALLPAPER" Clicked="ChangeMainImage" Margin="0, 10, 0, 0" HorizontalOptions="Start">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+					</StackLayout>
+					<StackLayout  Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+						<Label Text="{Binding Source={x:Reference ProfileInfoPage}, Path=portfolioUrlName}" HorizontalOptions="Start" VerticalOptions="Center" TextColor="#E84D3D" FontSize="11">
+							<Label.GestureRecognizers>
+						        <TapGestureRecognizer
+						                Tapped="OnURLTapped"
+						                NumberOfTapsRequired="1" />
+						  	</Label.GestureRecognizers>
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+						</Label>
+						<Button Text="EDIT URL" Clicked="EditURL" BackgroundColor="#99C259" WidthRequest="84" HeightRequest="35" BorderRadius="3" TextColor="White" FontSize="10" Margin="20, 0, 0, 0" VerticalOptions="Center">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+					</StackLayout>
+					<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+						<Label Text="NAME" FontSize="12" TextColor="#4a4a4a">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+					    <Entry x:Name="portfolioName" Placeholder="Name" Text="{Binding Source={x:Reference ProfileInfoPage}, Path=name}" Margin="0, 6, 0, 0" FontSize="11" TextColor="#4a4a4a" HeightRequest="37">
+                            <Entry.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Entry.FontFamily>
+                        </Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="3" Grid.Column="0">
+						<Label Text="GENERAL ENQUIRY NO." FontSize="12" TextColor="#4a4a4a">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Entry x:Name="portfolioGeneralEnquiryNo" Placeholder="General Enquiry No" Text="{Binding Source={x:Reference ProfileInfoPage}, Path=generalEnquiryContact}" FontSize="12" TextColor="#4a4a4a" HeightRequest="37">
+                            <Entry.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Entry.FontFamily>
+                        </Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+						<Label Text="MAINTENANCE NO." FontSize="12" TextColor="#4a4a4a">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Entry x:Name="portfolioMaintenanceNo" Placeholder="Maintenance No" Text="{Binding Source={x:Reference ProfileInfoPage}, Path=maintenanceContact}" FontSize="11" TextColor="#4a4a4a" HeightRequest="37">
+                            <Entry.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Entry.FontFamily>
+                        </Entry>
+					</StackLayout>
+			        <Button BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" BorderRadius="3" TextColor="White" FontSize="10" Text="SAVE CHANGES" Clicked="SaveData" HorizontalOptions="Start" Grid.Row="4" Grid.Column="0" VerticalOptions="Start">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+				</Grid>
+			</StackLayout>
+		</ScrollView>
+	</ContentView.Content>
+</ContentView>

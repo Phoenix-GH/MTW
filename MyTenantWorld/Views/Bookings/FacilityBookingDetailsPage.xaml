@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyTenantWorld.FacilityBookingDetailsPage"
+    x:Name="BookingDetailsPage"
+    xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:PriceDisplayConverter x:Key="priceDisplayConverter"></local:PriceDisplayConverter>
+            <local:PriceVisibleConverter x:Key="priceVisibleConverter"></local:PriceVisibleConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+             
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" Text ="{Binding Source={x:Reference BookingDetailsPage}, Path=facilityName}" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="Confirm" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="Confirm" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="#F6F9FA">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                                Tapped="OnTapGestureRecognizerTapped"
+                                NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                    <Image VerticalOptions="Start" HorizontalOptions="Fill" HeightRequest="161" Aspect="AspectFill" Source="{Binding Source={x:Reference BookingDetailsPage}, Path=facilityImage}" />
+                    <Grid x:Name="grid" VerticalOptions="Start" Margin="30,20,30,20" RowSpacing="30" ColumnSpacing="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="146" />
+                        </Grid.RowDefinitions>
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0">
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="ic_cal_big.png" />
+                                <StackLayout Orientation="Vertical" Margin="25, 0, 0, 0" x:Name="timeLayout" VerticalOptions="Center">
+                                    <Label x:Name="dateLabel" FontSize="16" TextColor="#4a4a4a" Text="{Binding Source={x:Reference BookingDetailsPage}, Path=date, StringFormat='{0:MMMM dd yyyy}'}" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Grid.Row="0" Grid.Column="1">
+                            <StackLayout Orientation="Horizontal" >
+                                <Image Source="ic_wallet.png" />
+                                <StackLayout Orientation="Vertical" Margin="25, 0, 0, 0" VerticalOptions="Center">
+                                    <Label x:Name="priceLabel" FontSize="16" TextColor="#4a4a4a" Text="{Binding Source={x:Reference BookingDetailsPage}, Path=total, Converter={StaticResource priceDisplayConverter}}">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label x:Name="depositValueLabel" Text="{Binding Source={x:Reference BookingDetailsPage}, Path=deposit}" IsVisible = "false"/>
+                                    <Label x:Name="bookingFeeLabel" FontSize="11" TextColor="#4a4a4a" Text="{Binding Source={x:Reference BookingDetailsPage}, Path=bookingFee, StringFormat='${0} booking fee'}" IsVisible="{Binding Source={x:Reference BookingDetailsPage}, Path=bookingFee, Converter={StaticResource priceVisibleConverter}}">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label x:Name="depositLabel" FontSize="11" TextColor="#4a4a4a" Text="{Binding Source={x:Reference BookingDetailsPage}, Path=deposit, StringFormat='${0} deposit'}" IsVisible="{Binding Source={x:Reference BookingDetailsPage}, Path=deposit, Converter={StaticResource priceVisibleConverter}}">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="White" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="30, 26, 30, 30">
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                        Tapped="OnTapGestureRecognizerTapped"
+                                        NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                                <Label FontSize="16" TextColor="#4a4a4a" Text="Remarks">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Frame HorizontalOptions="Fill" Margin="0, 14, 0, 30">
+                                    <Editor x:Name = "remarksText" />
+                                    
+                                </Frame>
+                                <Grid HorizontalOptions="Fill" VerticalOptions="Start" Margin="30,20,30,20" ColumnSpacing="30" RowSpacing="35">
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Label FontSize="16" TextColor="#4a4a4a" Text="Payment Method" Grid.Row="0" Grid.Column="0">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label FontSize="16" TextColor="#4a4a4a" Text="Reminder" Grid.Row="0" Grid.Column="1">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <controls:SegmentedControl x:Name="paymentSegment" TintColor="#007AFF" SelectedSegment="0" HorizontalOptions="Fill" HeightRequest="30" Grid.Row="1" Grid.Column="0">
+                                    </controls:SegmentedControl>
+                                    <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1" VerticalOptions="Start">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                    Tapped="OnTapGestureRecognizerTapped"
+                                                    NumberOfTapsRequired="1" />
+                                        </StackLayout.GestureRecognizers>
+                                        <controls:SegmentedControl x:Name="reminderSegment" TintColor="#007AFF" SelectedSegment="0" HorizontalOptions="Fill" HeightRequest="30" VerticalOptions="Start">
+                                        </controls:SegmentedControl>
+                                        <Label x:Name="warningLabel" FontSize="12" TextColor="Red" Text="" VerticalOptions="Start">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <ListView x:Name="residentListView" IsVisible="false" ItemTapped="Handle_ItemTapped" VerticalOptions="Start">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell Height="35"> 
+                                                        <ViewCell.View>
+                                                        <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Orientation="Horizontal">
+                                                            <Image WidthRequest="21" HeightRequest="21"  HorizontalOptions="Start"/>
+                                                            <Label Text="{Binding tenantName}" HeightRequest="13" HorizontalOptions="StartAndExpand" Margin="10, 0, 0, 0" VerticalOptions="Center" FontSize="11" TextColor="#4a4a4a">
+                                                                <Label.FontFamily>
+                                                                    <OnPlatform x:TypeArguments="x:String">
+                                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                                    </OnPlatform>
+                                                                </Label.FontFamily>
+                                                            </Label>
+                                                            <local:PlusButton HorizontalOptions="End" VerticalOptions="Center" Margin="0, 0, 8, 0" IsSet="{Binding selected}"/>
+                                                        </StackLayout>
+                                                            </ViewCell.View>
+                                                    </ViewCell> 
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

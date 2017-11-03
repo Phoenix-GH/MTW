@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.CreateNewsPage"
+    xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+    x:Name="NewsPageCreation">
+	<ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72" VerticalOptions="Start">
+                    <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                    <Label VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand" Text="Setup">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Button Clicked="Publish" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="PUBLISH" TextColor="White" FontSize="10" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+                <Label Text="This will target all users" FontSize="12" TextColor="#e74c3c" x:Name="descriptionText" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <ScrollView VerticalOptions="Fill">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="30, 30, 30, 30">
+                        <Frame Padding="30, 30, 30, 30" HorizontalOptions="Start" WidthRequest="211" VerticalOptions="Start">
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Fill" WidthRequest="193">
+                                <Image VerticalOptions="Start" WidthRequest="75" HeightRequest="75" x:Name="imageView" HorizontalOptions="Center" />
+                                <Button BackgroundColor="#99C259" WidthRequest="105" HeightRequest="35" BorderRadius="3" TextColor="White" FontSize="10" Text="CHANGE IMAGE" Clicked="ChangeImage" Margin="0, 20, 0, 0" HorizontalOptions="Center" >
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <Frame Padding="30, 30, 30, 30"  Margin="30, 0, 0, 0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation ="Vertical">
+                                <controls:SegmentedControl x:Name="userSegment" TintColor="#ED9421" SelectedSegment="0" HeightRequest="30">
+                                    </controls:SegmentedControl>
+                                <StackLayout  Orientation="Horizontal" Margin="0, 25, 0, 0" HeightRequest="33">
+                                    <Image Source="ic_home.png" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                    <!--<Picker x:Name="blockPicker" Title="Select Block" SelectedIndexChanged="Block_Selected" IsEnabled="false" Margin="32, 0, 0, 0" VerticalOptions="Center"/>-->
+                                    <Frame WidthRequest="199" Padding="12, 0, 12, 0" VerticalOptions="Fill">
+                                        <StackLayout  Orientation="Horizontal">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                        Tapped="Handle_Tapped"
+                                                        NumberOfTapsRequired="1" />
+                                            </StackLayout.GestureRecognizers>
+                                            <Label Text="All blocks" FontSize="11" TextColor="#4a4a4a"  VerticalOptions="Center" WidthRequest="199">
+                                                <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Image Source="ic_dropdown.png" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="13" HeightRequest="5"/>
+                                        </StackLayout>
+                                    </Frame>
+                                    <Button FontSize="9" TextColor="#E74C3C" Margin="10, 0, 0, 0" Text="Uncheck All" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="Uncheck_Clicked">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Button>
+                                </StackLayout>
+                                
+                                <AbsoluteLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                                    <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                                        <StackLayout Orientation="Horizontal" Margin="0, 23, 0, 0">
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+
+                                                <Label Text="TITLE" FontSize="12" TextColor="#4a4a4a" >
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                                <Entry x:Name="titleText" Placeholder="Name" Margin="0, 6, 0, 0" FontSize="11" TextColor="#4a4a4a" HeightRequest="37">
+                                                    <Entry.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Entry.FontFamily>
+                                                </Entry>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Vertical" HorizontalOptions="End" Margin="30 ,0 ,0 ,0" WidthRequest="110">
+                                                <Label Text="DATE" FontSize="12" TextColor="#4a4a4a" >
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                                <DatePicker x:Name="startDatePicker" TextColor="#4a4a4a" HeightRequest="60" Margin="0, 6, 0, 0" >
+                                                   
+                                                </DatePicker>
+                                                <DatePicker x:Name="endDatePicker" TextColor="#4a4a4a" HeightRequest="60" Margin="0, 6, 0, 0" >
+                                                   
+                                                </DatePicker>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical" Margin="0, 30, 0, 0" HorizontalOptions="Fill">
+                                            <Label Text="BODY TEXT" FontSize="12" TextColor="#4a4a4a">
+                                                <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Editor x:Name="bodyText" FontSize="11" TextColor="#4a4a4a" HeightRequest="142" Margin="0, 6, 0, 0">
+
+                                                <Editor.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Editor.FontFamily>
+                                            </Editor>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Margin="0, 30, 0, 0">
+                                            <Label Text="Send push notifcation" FontSize="12" TextColor="#4a4a4a">
+                                                <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Switch x:Name="notificationSwitch" Margin="30, 0, 0, 0" VerticalOptions="Center"/>
+                                            
+                                        </StackLayout>
+                                        <Button FontSize="9" TextColor="#E74C3C" Margin="0, 28, 0, 0" Text="EMAIL INDIVIDUAL INSTEAD" BackgroundColor="Transparent" HorizontalOptions="Start" Clicked="Email_Clicked">
+                                            <Button.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Button.FontFamily>
+                                        </Button>
+                                        <Button FontSize="9" TextColor="#E74C3C" BackgroundColor="Transparent" Text="CREATE PUBLIC NEWS FOR WEBSITE" HorizontalOptions="Start" Clicked="CreatePublicNews">
+                                            <Button.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Button.FontFamily>
+                                        </Button>
+                                    </StackLayout>
+                                    <ListView AbsoluteLayout.LayoutBounds="42, 0, 199, 380" AbsoluteLayout.LayoutFlags="None" x:Name="blockList" BackgroundColor="#f2f2f2" IsVisible="false" HeightRequest="380" SeparatorColor="#979797">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <StackLayout Orientation="Horizontal" Padding="12, 6, 12, 6">
+                                                        <Label Text="{Binding blockNo}" FontSize="11" TextColor="#4a4a4a" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                                            <Label.FontFamily>
+                                                                <OnPlatform x:TypeArguments="x:String">
+                                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                                </OnPlatform>
+                                                            </Label.FontFamily>
+                                                        </Label>
+                                                        <Switch IsToggled="{Binding isSelected}" HorizontalOptions="End" VerticalOptions="Center">
+                                                            
+                                                        </Switch>
+                                                    </StackLayout>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </AbsoluteLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference NewsPageCreation}, Path=isBusy}" IsRunning="{Binding Source={x:Reference NewsPageCreation}, Path=isBusy}" />
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

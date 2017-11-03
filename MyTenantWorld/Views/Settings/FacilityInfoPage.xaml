@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.FacilityInfoPage" xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld" 
+	xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions">
+	<ContentPage.Content>
+		<ScrollView VerticalOptions="Fill">
+			<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+				<StackLayout Orientation = "Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="#2196F3">
+					<Button x:Name="backButton" Text="Back" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="Back_Clicked"/>
+					<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+						<Button x:Name="infoPageButton" Text="Info" BackgroundColor="Transparent" Clicked="InfoPage"/>
+						<Button x:Name="slotPageButton" Text="Slots" BackgroundColor="Transparent" Clicked="SlotPage"/>
+						<Button x:Name="rulesPageButton" Text="Rules" BackgroundColor="Transparent" Clicked="RulesPage"/>
+					</StackLayout>
+					<Button x:Name="doneButton" Text="Done" HorizontalOptions="End" BackgroundColor="Transparent" Clicked="SaveData"/>
+				</StackLayout>
+				<controls:CarouselViewControl x:Name="carouselView" Position="0" Orientation="Horizontal" InterPageSpacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsSwipingEnabled="false">
+				</controls:CarouselViewControl>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

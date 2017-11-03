@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.CustomizationView"
+	x:Name="CustomizationViewPage">
+	<ContentView.Content>
+		<ScrollView>
+			<StackLayout Orientation="Vertical" HorizontalOptions="Fill" Padding="10,40,10,0" VerticalOptions="Fill">
+				<Label Text="Format"/> 
+				<ListView x:Name="indexingListview" HorizontalOptions="Fill" ItemsSource="{Binding Source={x:Reference CustomizationViewPage}, Path=data.indexing}" VerticalOptions="Start">
+					<ListView.ItemTemplate>
+				        <DataTemplate>
+							<ViewCell>
+								<StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal"> 
+									<Label Text="{Binding format}" VerticalOptions="Center"/>
+									<Entry Text="{Binding numberPart1}" Placeholder="Prefix" VerticalOptions="Center"/>
+									<Entry Text="{Binding numberPart2}" Placeholder="Day" VerticalOptions="Center"/>
+									<Entry Text="{Binding numberPart3}" Placeholder="Month" VerticalOptions="Center"/>
+									<Entry Text="{Binding numberPart4}" Placeholder="Count" VerticalOptions="Center"/>
+									<Entry Text="{Binding numberPart5}" Placeholder="None" VerticalOptions="Center"/>
+									<Entry Text="{Binding initialNumber}" Placeholder="Initial no." VerticalOptions="Center"/>
+									<Label BindingContext="{x:Reference receiptStepper}" Text="{Binding Value, StringFormat='{0} digit(s)'}"  />
+									<Stepper x:Name="receiptStepper" Minimum="{Binding minDigit}" Maximum="10" Increment="1" />
+								</StackLayout>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Label Text="Notifications"/> 
+				<ListView x:Name="notificationListview" HorizontalOptions="Fill" ItemsSource="{Binding Source={x:Reference CustomizationViewPage}, Path=data.notification}">
+					<ListView.ItemTemplate>
+				        <DataTemplate>
+							<ViewCell>
+								<StackLayout Orientation="Horizontal"> 
+									<Label Text="{Binding emailTitle}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+									<Switch IsToggled="{Binding status}" />
+								</StackLayout>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+
+				<Label Text="Legal"/> 
+				<ListView x:Name="legalListView"
+				    GroupDisplayBinding="{Binding Title}"
+				    RowHeight="150"
+				    GroupShortNameBinding="{Binding Title}"
+				    IsGroupingEnabled="false"
+					ItemsSource="{Binding Source={x:Reference CustomizationViewPage}, Path=data.legal}">
+				    <ListView.ItemTemplate>
+				        <DataTemplate>
+							<ViewCell>
+					          	<Grid>
+									<Grid.RowDefinitions>
+									    <RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+									    <ColumnDefinition Width="*" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="0" Grid.Column="0"> 
+										<Label Text="Show" VerticalOptions="Center"/>
+										<Switch IsToggled="{Binding status}" />
+									</StackLayout>
+									<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+										<Label Text="Rules and Regulations" />
+										<Editor Text="{Binding rulesandRegulation}" HeightRequest="50"/>
+									</StackLayout>
+									<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+										<Label Text="Terms and Conditions" />
+										<Editor Text="{Binding termsandCondition}" HeightRequest="50"/>
+									</StackLayout>
+								</Grid>
+							</ViewCell>
+				        </DataTemplate>
+				    </ListView.ItemTemplate>
+			      	<ListView.GroupHeaderTemplate>
+				        <DataTemplate>
+				          	<ViewCell>
+					            <StackLayout Orientation="Horizontal" Padding="5,5,5,5" BackgroundColor="#E2F5F9">
+									<Label Text="{Binding Title}" />
+										<Label.GestureRecognizers>
+								        <TapGestureRecognizer
+											CommandParameter="{Binding .}"
+							                Tapped="HeaderTapped"
+							                NumberOfTapsRequired="1" />
+								  </Label.GestureRecognizers>
+					            </StackLayout>
+				          	</ViewCell>
+				        </DataTemplate>
+			      	</ListView.GroupHeaderTemplate>
+			    </ListView>
+			</StackLayout>
+		</ScrollView>
+	</ContentView.Content>
+</ContentView>

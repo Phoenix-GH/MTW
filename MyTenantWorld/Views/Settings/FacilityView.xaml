@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.FacilityView" 
+	xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+	x:Name="FacilityInfoPage">
+	<ContentView.Content>
+		<StackLayout Orientation="Vertical" VerticalOptions="Fill">
+			
+
+			<ListView HorizontalOptions="Fill" VerticalOptions="Fill" x:Name="facilityListView" RowHeight="119">
+                <ListView.Header>
+                     <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="165" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                           
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HeightRequest="29">
+                            <Label Text="Image" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                            <Label Text="Name &amp; Description " TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                            <Label Text="Delete" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </ListView.Header>
+				<ListView.ItemTemplate>
+			    	<DataTemplate>
+						<ViewCell Height="119">
+							<StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Orientation="Horizontal">
+								<Image WidthRequest="100" HeightRequest="68" Source="{Binding photo}" Aspect="AspectFit" VerticalOptions="Center" Margin="25, 0,19, 0"/>
+								<StackLayout Orientation="Vertical" VerticalOptions="Center" Margin="21, 9, 68, 0" HorizontalOptions="StartAndExpand">
+					        		<Label Text="{Binding facilityName}" HeightRequest="37" FontSize="16" TextColor="#4A4A4A">
+										<Label.FontFamily>
+											<OnPlatform x:TypeArguments="x:String">
+									            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+									            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+									        </OnPlatform>
+										</Label.FontFamily>
+									</Label>
+									<Label Text="{Binding description}" HeightRequest="54" FontSize="11" TextColor="#4A4A4A">
+										<Label.FontFamily>
+											<OnPlatform x:TypeArguments="x:String">
+									            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+									            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+									        </OnPlatform>
+										</Label.FontFamily>
+									</Label>
+								</StackLayout>
+								<Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" Margin="0,0,44,0" HorizontalOptions="End" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}">
+								</Button>
+							</StackLayout>
+						</ViewCell>
+			    	</DataTemplate>
+			    </ListView.ItemTemplate>
+			</ListView>
+			<ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" IsVisible="{Binding Source={x:Reference FacilityInfoPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference FacilityInfoPage}, Path=isBusy}" />
+<!--			<Button HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="50" Text="Add" Clicked="AddNewFacility"/>-->
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

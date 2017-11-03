@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.FilesPage"
+	xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+	x:Name="FilesPage">
+	<ContentPage.Content>
+        <AbsoluteLayout>
+            
+		<StackLayout Orientation="Vertical" VerticalOptions="Fill" BackgroundColor="#f6f9fa" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72" VerticalOptions="Start">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" Text = "Folders" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+               <!-- <Button Clicked="Edit" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="Edit" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>   
+                    </Button.FontFamily>
+                </Button>-->
+            </StackLayout>
+			
+            <ScrollView VerticalOptions="FillAndExpand">
+                <Grid x:Name="grid" ColumnSpacing="30" RowSpacing="30" Padding="30, 30, 30, 30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+			</ScrollView>
+			<Button x:Name="newButton" x:HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="50" Text="Add" Clicked="AddNew"/>
+		</StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5, 0.5, AutoSize, AutoSize" IsVisible="{Binding Source={x:Reference FilesPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference FilesPage}, Path=isBusy}" />
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

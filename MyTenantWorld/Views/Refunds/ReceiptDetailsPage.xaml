@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.ReceiptDetailsPage"
+    xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="ReceiptPage">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" Text ="{Binding Source={x:Reference ReceiptPage}, Path=transactionType}" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="Confirm" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="Done" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="#F6F9FA">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill"  Padding="30, 30, 30, 30">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="" />
+                        <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=facilityName}" TextColor="#4a4a4a"  VerticalOptions="Center" FontSize="21">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                    </StackLayout>
+                    <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=strataTitle, StringFormat='The Management Strata Title Plan {0}'}"  VerticalOptions="Center" FontSize="12" TextColor="#4a4a4a">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=agencyName}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=agencyMobile, StringFormat='Tel: {0}'}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=agencyFax, StringFormat='Fax: {0}'}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Text="{Binding Source={x:Reference ReceiptPage}, Path=website, StringFormat='Website: {0}'}}" TextColor="#ed948b" VerticalOptions="Center" FontSize="12" BackgroundColor="Transparent">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+
+                    <Label Text="{Binding Source={x:Reference ReceiptPage}, Path=transactionType}" TextColor="#4a4a4a"  VerticalOptions="Center" FontSize="18">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    
+                    <Grid x:Name="grid" VerticalOptions="Start" Margin="0,20,0,0" ColumnSpacing="63">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                    
+                        </Grid.RowDefinitions>
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0">
+                            <StackLayout Orientation="Horizontal" >
+                                
+                                <StackLayout Orientation="Vertical" Margin="25, 0, 0, 0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="16" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=givenName}">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Label FontSize="16" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=familyName}">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="11" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=blockNo}">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Label FontSize="11" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=unitNo}">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <Grid>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Staff name:" Grid.Row="0" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=staffName}" Grid.Row="0" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Our ref:" Grid.Row="1" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=receiptNo}" Grid.Row="1" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Date:" Grid.Row="2" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=date}" Grid.Row="2" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Cheque no:" Grid.Row="3" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=chequeNo}" Grid.Row="3" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Bank:" Grid.Row="4" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=bank}" Grid.Row="4" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Payment Method:" Grid.Row="5" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference ReceiptPage}, Path=paymentMethod}" Grid.Row="5" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </Grid>
+                            
+                        </StackLayout>
+                    </Grid>
+                    <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0" Margin="0, 40, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <Label Text="Reference" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                              
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                            <Label Text="Description" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFacilityArrow" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                            <Label Text="Type" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByUnitNoArrow" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                            <Label Text="Amount" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                               
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByBookedByArrow" />
+                        </StackLayout>
+                    </Grid>
+                    <ListView x:Name="listView" ItemsSource="{Binding Source={x:Reference ReceiptPage}, Path=receiptDetailList}" RowHeight="55">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="55">
+                                    <Grid HorizontalOptions="Fill" Padding="14, 0, 13, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="*" />
+
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding refNo}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Label Text="{Binding description}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Label Text="{Binding type}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Label Text="{Binding amount, StringFormat='${0}'}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="3" VerticalOptions="Center">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+
+                                    </Grid>
+                               </ViewCell> 
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label x:Name="totalLabel" Text="{Binding Source={x:Reference ReceiptPage}, Path=totalPayment, StringFormat='Total: ${0}'}" HorizontalOptions="End" Margin="0,0,37,0" TextColor="#4a4a4a" FontSize="12">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <!--<Label Text ="Remarks"  VerticalOptions="Center" FontSize="12" TextColor="#4a4a4a" Margin="0, 40, 0, 0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label Text ="{Binding Source={x:Reference ReceiptPage}, Path=remarks}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>-->
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="#EAEAEA" HeightRequest="62" HorizontalOptions="Fill" VerticalOptions="End">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Image VerticalOptions="Center" Source="ic_print.png" />
+                    <Label FontSize="13" TextColor="#E74C3C" Text="PRINT" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                         <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+
+	</ContentPage.Content>
+</ContentPage>

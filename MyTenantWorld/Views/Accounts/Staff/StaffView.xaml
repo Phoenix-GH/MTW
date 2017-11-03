@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.StaffView"
+	xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+	x:Name="StaffPage">
+	<ContentView.Content>
+        <AbsoluteLayout>
+    		<StackLayout Orientation="Vertical" BackgroundColor="#f6f9fa" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+    			<StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+                <Frame Margin="30, 30, 30, 30" > 
+    				<Grid HorizontalOptions="Fill" ColumnSpacing="1" BackgroundColor="Gray">
+    					<Grid.RowDefinitions>
+    					    <RowDefinition Height="*" />
+    					</Grid.RowDefinitions>
+    					<Grid.ColumnDefinitions>
+    					    <ColumnDefinition Width="234" />
+    						<ColumnDefinition Width="*" />
+    					</Grid.ColumnDefinitions>
+    					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" BackgroundColor="White">
+    						<ListView x:Name="listView" HorizontalOptions="FillAndExpand" ItemsSource="{Binding staffItems}" ItemTapped="Handle_ItemTapped" RowHeight="70">
+    							<ListView.ItemTemplate>
+    								<DataTemplate>
+    									<ViewCell Height="75">
+    										<StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Orientation="Horizontal">
+    											<Image WidthRequest="30" HeightRequest="30" Source="ic_smallprofile.png" Margin="20, 0, 0, 0" VerticalOptions="Center">
+    												<Image.GestureRecognizers>
+    												    <TapGestureRecognizer 
+    														x:Name="TapDelete"
+    									                    Command="{Binding Source={x:Reference StaffPage}, Path=DeleteCommand}"
+    									                    CommandParameter="{Binding userId}"
+    													/>
+    												</Image.GestureRecognizers>
+    											</Image>
+
+    											<StackLayout Orientation="Vertical" Margin="10, 0, 0, 0" VerticalOptions="CenterAndExpand">
+    								        		<Label Text="{Binding userName}" FontSize="11">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String">
+                                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
+    												<Label Text="{Binding permissionGroup}" FontSize="10">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String">
+                                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
+    											</StackLayout>
+    										</StackLayout>
+    									</ViewCell>
+    						    	</DataTemplate>
+    							</ListView.ItemTemplate>
+    						</ListView>
+    					</StackLayout>
+    					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1" Padding="30,30,30,30" BackgroundColor="White">
+    						<Image x:Name="avatarImage" Source="ic_profile.png" HorizontalOptions="Center" WidthRequest="70" HeightRequest="70" />
+    						<controls:SegmentedControl x:Name="userGroupSegment" TintColor="#f1c40f" SelectedSegment="{Binding Source={x:Reference StaffPage}, Path=selectedSegment}" HorizontalOptions="Fill" HeightRequest="30" Margin="0, 60, 0, 0">
+    						</controls:SegmentedControl>
+                            <Grid HorizontalOptions="Fill" ColumnSpacing="30" Margin="0, 10, 0, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                                    <Label Text="Screen Name" FontSize="12">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Entry x:Name="screenNameText" Text ="{Binding Source={x:Reference StaffPage}, Path=screenName}"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+        						    <Label Text="Email" FontSize="12">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+        						    <Entry x:Name="emailText" Keyboard="Email" Text ="{Binding Source={x:Reference StaffPage}, Path=email}"/>
+                                    <Button x:Name="resetButton" Text="Reset Password" Clicked="Reset_Clicked" TextColor="#E74C3C" BackgroundColor="Transparent" FontSize="11" HorizontalOptions="End">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                        </Button>
+                                    
+                                    </StackLayout>
+                                <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+    						
+        						    <Label Text="Given Name" FontSize="12">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                        </Label>
+        						    <Entry x:Name="givenNameText" Text ="{Binding Source={x:Reference StaffPage}, Path=givenName}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+    						        <Label Text="Surname" FontSize="12">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+    						        <Entry x:Name="surnameText" Text ="{Binding Source={x:Reference StaffPage}, Path=surName}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+    						        <Label Text="Mobile" FontSize="12">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+    						        <Entry x:Name="mobileText" Text ="{Binding Source={x:Reference StaffPage}, Path=mobile}"/>
+                                </StackLayout>
+                            </Grid>
+    					</StackLayout>
+
+    				</Grid>
+                </Frame>
+    				</StackLayout>
+        		    <StackLayout Orientation="Horizontal" BackgroundColor="#EAEAEA" HeightRequest="62" HorizontalOptions="Fill" VerticalOptions="End">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                        Tapped="AddNewStaff"
+                                        NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                <Image VerticalOptions="Center" Source="ic_plus.png" WidthRequest="22" HeightRequest="22"/>
+                                <Label FontSize="13" TextColor="#E74C3C" Text="ADD NEW" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                        Tapped="Delete"
+                                        NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                <Image VerticalOptions="Center" Source="ic_delete.png" WidthRequest="22" HeightRequest="22" />
+                                <Label FontSize="13" TextColor="#E74C3C" Text="DELETE" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                                
+                    </StackLayout>
+                </StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference StaffPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference StaffPage}, Path=isBusy}" />
+        </AbsoluteLayout>
+	</ContentView.Content>
+</ContentView>

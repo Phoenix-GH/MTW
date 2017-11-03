@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.ActivationPage" xmlns:abstractions="clr-namespace:RoundedBoxView.Forms.Plugin.Abstractions;assembly=RoundedBoxView.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld">
+	<ContentPage.Content>
+		<AbsoluteLayout>
+			<Image x:Name="bgImage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            Source = "BG2.jpg" Aspect="AspectFill" VerticalOptions="Fill" />
+		
+			<ScrollView>
+				<Grid x:Name="grid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+					    <RowDefinition Height="140" />
+					    <RowDefinition Height="Auto" />
+					    <RowDefinition Height="*" />
+
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="*" />
+					    <ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+		        <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Row="0" Grid.Column="1">
+					<Image VerticalOptions="Center" Source="Arrow.png" HorizontalOptions="End" Margin="0,0,12,0" RotationY="180"/>
+					<Button Text="GO BACK" TextColor="#ffffff" Clicked="OnGoBackClicked" FontSize="12" BackgroundColor="Transparent" >
+						<Button.FontFamily>
+							<OnPlatform x:TypeArguments="x:String">
+					            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+					            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+					            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+					        </OnPlatform>
+						</Button.FontFamily>
+					</Button>
+				</StackLayout>
+				<abstractions:RoundedBoxView Grid.Row="1" Grid.Column="1" BackgroundColor="White" 
+		   				BorderColor="#979797" CornerRadius="5" BorderThickness="3" />
+				<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1" Padding="40">
+					<Image HorizontalOptions="Center" Source="Key_large.png" />
+					<Label Text="Activation" TextColor="#4a4a4a" FontSize="30" HorizontalOptions="Center" Margin="0,40,0,0">
+						<Label.FontFamily>
+							<OnPlatform x:TypeArguments="x:String">
+					            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+					            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+					            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+					        </OnPlatform>
+						</Label.FontFamily>
+					</Label>
+						
+					<BoxView BackgroundColor="#cd6732" HeightRequest="4.5" HorizontalOptions="Center" WidthRequest="67.36"/>	
+						
+					<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Margin="0,40,0,0">
+						<Grid.RowDefinitions>
+						    <RowDefinition Height="Auto" />
+						    <RowDefinition Height="40" />
+						    <RowDefinition Height="40" />
+							<RowDefinition Height="40" />
+							<RowDefinition Height="60" />
+							<RowDefinition Height="40" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+				
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.Row="0" Grid.Column="0" Text="Create a password to use with your account." TextColor="#9b9b9b" FontSize="18" HorizontalOptions="Fill" LineBreakMode="WordWrap" VerticalOptions="Fill">
+							<Label.FontFamily>
+								<OnPlatform x:TypeArguments="x:String">
+						            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+						            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+						            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+						        </OnPlatform>
+							</Label.FontFamily>
+						</Label>
+
+						<abstractions:RoundedBoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#f0f0f0" 
+			   				BorderColor="#979797" CornerRadius="8" BorderThickness="1">
+						</abstractions:RoundedBoxView>
+						<StackLayout Orientation = "Horizontal" Grid.Row="1" Grid.Column="0" >
+							<Image VerticalOptions="Center" Source="Email.png" Margin="15,0,0,0"/>
+							<Image HorizontalOptions="Center" Source="Line.png" />
+							<local:LineEntry Placeholder="Email Address" x:Name="emailEntry" HorizontalOptions="FillAndExpand" Keyboard="Email" FontSize="12" IsEnabled="false">
+								<local:LineEntry.FontFamily>
+									<OnPlatform x:TypeArguments="x:String">
+							            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+							            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+							            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+							        </OnPlatform>
+								</local:LineEntry.FontFamily>
+							</local:LineEntry>
+						</StackLayout>
+							
+						<abstractions:RoundedBoxView Grid.Row="2" Grid.Column="0" BackgroundColor="White" 
+		   				BorderColor="#979797" CornerRadius="8" BorderThickness="1" >
+						</abstractions:RoundedBoxView>
+						<StackLayout Orientation = "Horizontal" Grid.Row="2" Grid.Column="0">
+							<Image HorizontalOptions="Center" Source="Key.png" Margin="15,0,0,0"/>
+							<Image HorizontalOptions="Center" Source="Line.png" />
+							<local:LineEntry Placeholder="Password" x:Name="passwordEntry" IsPassword="true" HorizontalOptions="FillAndExpand" FontSize="12" TextChanged="Handle_TextChanged">
+								<local:LineEntry.FontFamily>
+									<OnPlatform x:TypeArguments="x:String">
+							            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+							            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+							            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+							        </OnPlatform>
+								</local:LineEntry.FontFamily>
+							</local:LineEntry>
+						</StackLayout>
+
+						<abstractions:RoundedBoxView Grid.Row="3" Grid.Column="0" BackgroundColor="White" 
+		   				BorderColor="#979797" CornerRadius="8" BorderThickness="1" >
+						</abstractions:RoundedBoxView>
+						<StackLayout Orientation = "Horizontal" Grid.Row="3" Grid.Column="0">
+							<Image HorizontalOptions="Center" Source="Key.png" Margin="15,0,0,0"/>
+							<Image HorizontalOptions="Center" Source="Line.png" />
+							<local:LineEntry Placeholder="Confirm Password" x:Name="confirmEntry" IsPassword="true" HorizontalOptions="FillAndExpand" FontSize="12" TextChanged="Handle_TextChanged">
+								<local:LineEntry.FontFamily>
+									<OnPlatform x:TypeArguments="x:String">
+							            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+							            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+							            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+							        </OnPlatform>
+								</local:LineEntry.FontFamily>
+							</local:LineEntry>
+						</StackLayout>
+						<StackLayout Orientation="Vertical" Grid.Row="4" Grid.Column="0" VerticalOptions="Start">
+							<Image x:Name="markImage" HorizontalOptions="Center" WidthRequest="50" VerticalOptions="StartAndExpand" />
+							<Label x:Name="strengthLabel" HorizontalOptions="Center" VerticalOptions="End"/>
+						</StackLayout>
+						<abstractions:RoundedBoxView Grid.Row="5" Grid.Column="0" BackgroundColor="#CD6732" 
+			   				CornerRadius="8" BorderThickness="1">
+							</abstractions:RoundedBoxView>
+						<StackLayout x:Name="activateButton" Orientation = "Horizontal" Grid.Row="5" Grid.Column="0" HorizontalOptions="FillAndExpand">
+							<Label Text="ACTIVATE ACCOUNT" TextColor="White" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="114,0,0,0" FontSize="12">
+								<Label.FontFamily>
+									<OnPlatform x:TypeArguments="x:String">
+							            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+							            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+							            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+							        </OnPlatform>
+								</Label.FontFamily>
+							</Label>
+							<Image VerticalOptions="Center" Source="Arrow.png" HorizontalOptions="End" Margin="0,0,20,0" />
+						</StackLayout>
+						<ActivityIndicator x:Name="loadingIndicator" Color="Red" IsRunning="false" Grid.Row = "1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" />	
+					</Grid>
+					</StackLayout>
+				</Grid>
+			</ScrollView>
+		</AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

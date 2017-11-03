@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.CommitteeView"
+	xmlns:controls="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+	x:Name="CommitteeViewPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:RoleColorConverter x:Key="colorConverter"></local:RoleColorConverter>
+           
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentView.Content>
+		<StackLayout Orientation="Vertical" VerticalOptions="Fill">
+			<ActivityIndicator AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference CommitteeViewPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference CommitteeViewPage}, Path=isBusy}" />
+			<controls:DraggableListView HasUnevenRows="true"  BackgroundColor="White" x:Name="committeeListView" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <controls:DraggableListView.Header>
+                     <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                           
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HeightRequest="29">
+                            <Label Text="Image" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                            <Label Text="Name &amp; Description " TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                            <Label Text="Role" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                            <Label Text="Delete" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4" HeightRequest="29">
+                            <Label Text="Reorder" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </controls:DraggableListView.Header>
+				<controls:DraggableListView.ItemTemplate>
+					<DataTemplate>
+						<controls:DraggableViewCell Height="90">
+                            <Grid HorizontalOptions="Fill" Padding="15, 0, 15, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HeightRequest="90" HorizontalOptions="Fill">
+                                    <Image />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="90" HorizontalOptions="Fill">
+                                    <Label Text="{Binding name}" VerticalOptions="Center" FontSize="16" HorizontalOptions="Fill">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="90" HorizontalOptions="Fill">
+                                    <Button HeightRequest="30" Margin="0, 0, 0, 0" BorderRadius="3" Text="{Binding description}" BackgroundColor="White" BorderColor="{Binding description, Converter={StaticResource colorConverter}}" TextColor="{Binding description, Converter={StaticResource colorConverter}}" BorderWidth="1" FontSize="9" VerticalOptions="Center" HorizontalOptions="Center">
+                                         <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Button.FontFamily>
+                                    </Button>
+                                </StackLayout>
+                                <Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}" Grid.Row="0" Grid.Column="3">
+                                </Button>
+                            </Grid>
+					     	
+					   	</controls:DraggableViewCell> 
+					</DataTemplate>
+				</controls:DraggableListView.ItemTemplate>
+			</controls:DraggableListView>
+			<!--<Button HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="50" Text="Add" Clicked="AddNewCommittee"/>-->
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

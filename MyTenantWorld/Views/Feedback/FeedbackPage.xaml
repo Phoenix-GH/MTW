@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.FeedbackPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+            <local:FeedbackColorConverter x:Key="colorConverter"></local:FeedbackColorConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                    <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                    <Label x:Name="pageTitle" Text="Feedback" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <SearchBar x:Name="searchText" Placeholder="Subject" HorizontalOptions="End" TextChanged="Search_TextChanged">
+                    </SearchBar>
+                </StackLayout>
+                <Grid HorizontalOptions="Fill">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="showAllButton" HorizontalOptions="Fill" Text="ALL" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAll" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAll" IsVisible="false" />
+                    </StackLayout>
+                        <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="showPendingButton" HorizontalOptions="Fill" Text="PENDING" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowPending" TextColor="#E84D3D" />
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barPending" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="showAcknowledgedButton"  HorizontalOptions="Fill" Text="ACKNOWLEDGED" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAcknowledged" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAcknowledged" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="3">
+                        <Button x:Name="showAssignedButton" HorizontalOptions="Fill" Text="ASSIGNED" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAssigned" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAssigned" IsVisible="false"/>
+                    </StackLayout>
+                        <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="4">
+                        <Button x:Name="showClosedButton" HorizontalOptions="Fill" Text="Closed" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowClosed" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barClosed" IsVisible="false"/>
+                    </StackLayout>
+                </Grid>
+                <!--Filter Bar -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="30,23,30,0">
+                    <Image Source="ic_filters.png" />
+                    <Label Text="DATE RANGE" VerticalOptions="Center" FontSize="16" TextColor="#4a4a4a" Margin="35,0,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                     
+                    <DatePicker x:Name="bookingStartDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="15,0,0,0" DateSelected="StartDate_Selected"/>
+                    <DatePicker x:Name="bookingEndDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="10,0,0,0" DateSelected="EndDate_Selected"/>
+                    <Button Clicked="Clear_Filters" BackgroundColor="Transparent"  Margin="15,0,0,0" VerticalOptions="Center" Text="Clear Filters" TextColor="#E84D3D" FontSize="9" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+               
+                <ListView x:Name="listView" ItemTapped="Handle_ItemTapped" VerticalOptions="StartAndExpand">
+                    <ListView.Header>
+                         <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="14, 0, 13, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                <Label Text="Date" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                <Label Text="Subject" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByUnitNoArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                <Label Text="Reporter" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByBookedByArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                <Label Text="Status" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByPeriodArrow" />
+                            </StackLayout>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="55">
+                                <Grid HorizontalOptions="Fill" Padding="14, 0, 13, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding _feedbackDate}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding subject}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding residentName}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4">
+                                        <Button HeightRequest="35" Margin="0,0,0,0" WidthRequest="110" BorderRadius="3" Text="{Binding status}" BackgroundColor="White"  FontSize="9" Grid.Row="0" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="End" TextColor="{Binding status, Converter={StaticResource colorConverter}}" BorderColor="{Binding status, Converter={StaticResource colorConverter}}" BorderWidth="1">
+                                             <Button.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Button.FontFamily>
+                                        </Button>
+                                        <Image Source="ic_dropdownlarge_grey" RotationY="270" />
+                                    </StackLayout>
+                                </Grid>
+                           </ViewCell> 
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

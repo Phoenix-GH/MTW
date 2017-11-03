@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.MenuPage" Title="Menu Page">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="FillAndExpand" WidthRequest="213" BackgroundColor="#2A3141" Orientation="Vertical" Padding="21, 0, 21, 0">
+            <Image Source="logo_white.png" HorizontalOptions="Center" Margin="0, 24, 0, 24"/>
+            <ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" RowHeight="58">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="58">
+                            <StackLayout Orientation="Horizontal" HeightRequest="58" HorizontalOptions="Fill">
+                                <StackLayout Orientation="Horizontal" WidthRequest="47" Margin="0, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Start">
+                                    <Image Source="{Binding IconSource}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </StackLayout>
+                                <Label Text="{Binding Title}" TextColor="White" FontSize="15" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>   
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+			
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

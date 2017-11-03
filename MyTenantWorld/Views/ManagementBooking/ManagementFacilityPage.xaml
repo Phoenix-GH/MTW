@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyTenantWorld.ManagementFacilityPage">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" HorizontalOptions="Start" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+               
+            </StackLayout>
+           
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="#F6F9FA">
+                <StackLayout Orientation="Vertical">
+                    <Grid x:Name="grid" HorizontalOptions="Fill" VerticalOptions="Start" Margin="30,20,30,20" ColumnSpacing="30" RowSpacing="35">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="295" />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

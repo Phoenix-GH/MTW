@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.EditResident"
+	xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+    		<Grid HorizontalOptions="Fill" VerticalOptions="StartAndExpand">
+    			<Grid.RowDefinitions>
+    			    <RowDefinition Height="100" />
+    			    <RowDefinition Height="Auto" />
+    			    <RowDefinition Height="Auto" />
+    			</Grid.RowDefinitions>
+    			<Grid.ColumnDefinitions>
+    			    <ColumnDefinition Width="*" />
+    				<ColumnDefinition Width="*" />
+    			</Grid.ColumnDefinitions>
+    			<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+    				<controls:SegmentedControl x:Name="userGroupSegment" TintColor="#007AFF" SelectedSegment="0" HorizontalOptions="Fill" HeightRequest="300">
+    				</controls:SegmentedControl>
+    				<Label BindingContext="{x:Reference userGroupSegment}" Text="{Binding SelectedSegment}" />
+    			</StackLayout>
+    			<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+    				<Label Text="ScreenName"/>
+    				<Entry x:Name="screenNameText" />
+    			</StackLayout>
+    			<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+    				<Label Text="Email"/>
+    				<Entry x:Name="emailText"/>
+    			</StackLayout>
+
+    			<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+    				<Label Text="Given Name"/>
+    				<Entry x:Name="givenNameText" />
+    			</StackLayout>
+    			<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+    				<Label Text="Surname"/>
+    				<Entry x:Name="surNameText"/>
+    			</StackLayout>
+    			<StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+    				<Label Text="Booking Ban" HorizontalOptions="StartAndExpand"/>
+    				<Switch x:Name="suspendedSwitch" HorizontalOptions="End"/>
+    			</StackLayout>
+    		</Grid>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button Text="Email" Clicked="Email_Clicked" />
+                <Button Text="Reset Password" />
+            </StackLayout>
+        </StackLayout>
+
+	</ContentPage.Content>
+</ContentPage>

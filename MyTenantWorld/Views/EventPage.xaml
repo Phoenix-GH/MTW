@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.EventPage">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical" BackgroundColor="#f6f9fa">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70" Clicked="Back_Clicked"/>
+                <Label x:Name="pageTitle" Text="Events" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <Image Source="ic_comingsoon.png" HorizontalOptions="Center" Margin="0, 0, 0, 30"/>
+                <Label Text="Events are coming soon" VerticalOptions="Start" FontSize="21" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Label Text="Stay tuned for new event features" Margin="0, 16, 0, 0" FontSize="16" HorizontalOptions="Center">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="Back_Clicked" BackgroundColor="#99C259" WidthRequest="120" HeightRequest="35" Margin="0,38,0,0" Text="RETURN TO HOME" TextColor="White" FontSize="10" HorizontalOptions="Center">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

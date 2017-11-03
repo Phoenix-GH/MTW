@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.AgentView"
+	x:Name="AgentViewPage">
+	<ContentView.Content>
+		<ScrollView VerticalOptions="Fill">
+			<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Fill" WidthRequest="100">
+					<Image VerticalOptions="Start" WidthRequest="100" HeightRequest="100" x:Name="logoImage"/>
+					<Button Text="Change" Clicked="ChangeLogo"/>
+				</StackLayout>
+
+				<Grid x:Name="grid" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+					<Grid.RowDefinitions>
+					    <RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+				
+					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+						<Label Text="Name" />
+						<Entry x:Name="agentName" Placeholder="Name" Text="{Binding Source={x:Reference AgentViewPage}, Path=managingAgentName}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+						<Label Text="GST Reg No." />
+						<Entry x:Name="agentGstRegNo" Placeholder="GstRegNo" Text="{Binding Source={x:Reference AgentViewPage}, Path=gstNumber}" />
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+						<Label Text="Description" />
+						<Entry x:Name="agentDescription" Placeholder="Description" Text="{Binding Source={x:Reference AgentViewPage}, Path=description}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+						<Label Text="Website" />
+						<Entry x:Name="agentWebsite" Placeholder="Website" Text="{Binding Source={x:Reference AgentViewPage}, Path=website}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="3" Grid.Column="0">
+						<Label Text="Mobile No." />
+						<Entry x:Name="agentMobileNo" Placeholder="Mobile No" Text="{Binding Source={x:Reference AgentViewPage}, Path=phoneNo}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+						<Label Text="Fax No." />
+						<Entry x:Name="agentFaxNo" Placeholder="Fax No" Text="{Binding Source={x:Reference AgentViewPage}, Path=fax}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="5" Grid.Column="0">
+						<Label Text="Address (line 1)" />
+						<Entry x:Name="agentAddressLine1" Placeholder="Address (line 1)" Text="{Binding Source={x:Reference AgentViewPage}, Path=address}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="5" Grid.Column="1">
+						<Label Text="Email" />
+						<Entry x:Name="agentEmail" Placeholder="Email" Text="{Binding Source={x:Reference AgentViewPage}, Path=email}" />
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="6" Grid.Column="0">
+						<Label Text="Address (line 2)" />
+						<Entry x:Name="agentAddressLine2" Placeholder="Address (line 2)" Text="{Binding Source={x:Reference AgentViewPage}, Path=address2}"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="6" Grid.Column="1">
+						<Label Text="Postal Code" />
+						<Entry x:Name="agentPostalCode" Placeholder="Postal Code" Text="{Binding Source={x:Reference AgentViewPage}, Path=postalCode}"/>
+					</StackLayout>
+				</Grid>
+			</StackLayout>
+		</ScrollView>
+	</ContentView.Content>
+</ContentView>

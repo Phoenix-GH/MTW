@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.AccountsPage"
+	xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions">
+	<ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="White" HeightRequest="72">
+                    <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                    <Label Text="User Accounts" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                   <Button Clicked="SaveData" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="DONE" TextColor="White" FontSize="10" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+                <Grid BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="generalPageButton" HorizontalOptions="Fill" Text="General" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="GeneralPage"  TextColor="#E84D3D"/>
+                            
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barGeneral" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="staffPageButton"  HorizontalOptions="Fill" Text="Staff" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="StaffPage" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barStaff" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="permissionsPageButton" HorizontalOptions="Fill" Text="Permissions" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="PermissionsPage" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barPermission" IsVisible="false"/>
+                    </StackLayout>
+                </Grid>
+        		<ScrollView VerticalOptions="FillAndExpand">
+        			<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+        				<controls:CarouselViewControl x:Name="carouselView" Position="0" Orientation="Horizontal" InterPageSpacing="10" 
+        					VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsSwipingEnabled="false">
+        				</controls:CarouselViewControl>
+        			</StackLayout>
+        		</ScrollView>
+            </StackLayout>
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

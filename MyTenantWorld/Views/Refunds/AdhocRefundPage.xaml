@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.AdhocRefundPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+    x:Name="AdhocRefund">
+	<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="Confirm" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="DONE" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="#F6F9FA">
+                <!-- Main wrapper -->
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill"  Padding="30, 30, 30, 30">
+                    <!-- First Row -->
+                    <StackLayout Orientation="Horizontal">
+                        <!-- Name Part -->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                            <StackLayout Orientation="Horizontal">
+                                
+                                <Label Text ="{Binding Source={x:Reference AdhocRefund}, Path=facilityName}" TextColor="#4a4a4a"  VerticalOptions="Center" FontSize="21">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                            <Label Text ="{Binding Source={x:Reference AdhocRefund}, Path=strataTitle, StringFormat='The Management Strata Title Plan {0}'}"  VerticalOptions="Center" FontSize="12" TextColor="#4a4a4a">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+
+                            <Label Text ="{Binding Source={x:Reference AdhocRefund}, Path=agencyName}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text ="{Binding Source={x:Reference AdhocRefund}, Path=agencyMobile, StringFormat='Tel: {0}'}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text="{Binding Source={x:Reference AdhocRefund}, Path=agencyFax, StringFormat='Fax: {0}'}" TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text="Website: " TextColor="#4a4a4a" VerticalOptions="Center" FontSize="12" >
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Button Text="{Binding Source={x:Reference AdhocRefund}, Path=website}" TextColor="#ed948b" VerticalOptions="Center" FontSize="12" BackgroundColor="Transparent" WidthRequest="200">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                            </StackLayout>
+
+                        </StackLayout>
+                        <!-- End of Name part -->
+                        <!-- Staff Name part -->
+                        <StackLayout Orientation="Vertical" HorizontalOptions="End" VerticalOptions="End" MinimumWidthRequest="69">
+                            <Grid>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Staff name:" Grid.Row="0" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference AdhocRefund}, Path=staffName}" Grid.Row="0" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Our ref:" Grid.Row="1" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference AdhocRefund}, Path=receiptNo}" Grid.Row="1" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Date:" Grid.Row="2" Grid.Column="0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference AdhocRefund}, Path=date}" Grid.Row="2" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                               
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="{Binding Source={x:Reference AdhocRefund}, Path=chequeNo}" Grid.Row="3" Grid.Column="1">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                               
+                            </Grid>
+                        </StackLayout>
+                        <!-- End of Staff name part -->
+                    </StackLayout>
+                    <!-- End of first row -->
+                    <Label FontSize="18" TextColor="#4a4a4a" Text="Receipt" Margin="0, 35, 0, 30">
+                         <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Grid x:Name="grid" VerticalOptions="Start" ColumnSpacing="63">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                       
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="0">
+                            <StackLayout Orientation="Vertical" Padding="30, 30, 30, 65">
+                                <Picker x:Name="blockPicker" Title="Select Block" SelectedIndexChanged="Block_Selected" IsEnabled="false"/>
+                                <Picker x:Name="unitPicker" Title="Select Unit" Margin="0, 6, 0, 0" SelectedIndexChanged="Unit_Selected" IsEnabled="false"/>
+                                <Picker x:Name="userPicker" Title="Select User" Margin="0, 8, 0, 0" SelectedIndexChanged="User_Selected" IsEnabled="false"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame BackgroundColor="White" Grid.Row="0" Grid.Column="1">
+                            <StackLayout Orientation="Vertical" Padding="20, 20, 20, 0">
+                                <controls:SegmentedControl x:Name="paymentSegment" TintColor="#ED9421" SelectedSegment="0" HorizontalOptions="Fill" HeightRequest="30" Grid.Row="1" Grid.Column="0" IsEnabled="true">
+                                </controls:SegmentedControl>
+                                <Entry x:Name="chequeNoText" Placeholder="Cheque no" Margin="0, 20, 0, 0"/>
+                                <Entry x:Name="bankText" Placeholder="Bank" Margin="0, 15, 0, 0"/>
+                                <Label FontSize="12" TextColor="#4a4a4a" Text="Cheques are accepted subject to clearance" Margin="0, 15, 0, 0">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Italic.ttf#Lato-Italic</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+
+                    <ListView x:Name="listView" RowHeight="55" ItemsSource="{Binding Source={x:Reference AdhocRefund}, Path=receiptDetailList}" Margin="0, 40, 0, 0" HeightRequest="29">
+                        <ListView.Header>
+                            <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                    <Label Text="Reference" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                    <Label Text="Description" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                    <Label Text="Type" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                    <Label Text="Amount" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell Height="55">
+                                    <Grid HorizontalOptions="Fill" Padding="14, 0, 13, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="3*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Entry Text="{Binding refNo}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HeightRequest="37">
+                                             <Entry.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Entry.FontFamily>
+                                        </Entry>
+                                        <Entry Text="{Binding description}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" HeightRequest="37">
+                                             <Entry.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Entry.FontFamily>
+                                        </Entry>
+                                        <Entry Text="{Binding type}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="2" VerticalOptions="Center" HeightRequest="37">
+                                             <Entry.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Entry.FontFamily>
+                                        </Entry>
+                                        <Entry Text="{Binding amount}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="3" VerticalOptions="Center" HeightRequest="37" TextChanged="Handle_TextChanged">
+                                             <Entry.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Entry.FontFamily>
+                                        </Entry>
+                                        <Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}" Grid.Row="0" Grid.Column="4" />
+                                    </Grid>
+                               </ViewCell> 
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                        <Button Clicked="AddNewItem" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0, 20, 0, 0" Text="ADD ITEM" TextColor="White" FontSize="10" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Label x:Name="totalLabel" Text="{Binding Source={x:Reference AdhocRefund}, Path=totalPayment, StringFormat='Total: ${0}'}" HorizontalOptions="End" Margin="0,0,25,0" TextColor="#4a4a4a" FontSize="14" VerticalOptions="Center">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                    </StackLayout>
+                    <Frame CornerRadius="3" Padding="30, 26,30, 30" Margin="0,20, 0, 24">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Remarks" Margin="0,0,0, 14" TextColor="#4a4a4a" FontSize="16">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Editor HorizontalOptions="Fill" HeightRequest="72" x:Name="remarksText" FontSize="11">
+                                <Editor.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Editor.FontFamily>
+                            </Editor>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

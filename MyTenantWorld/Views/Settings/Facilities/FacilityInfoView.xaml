@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.FacilityInfoView"
+	xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+	x:Name="FacilityInfoViewPage"
+	xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld" >
+	<ContentView.Content>
+		<ScrollView VerticalOptions="Fill">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+				<StackLayout Orientation="Vertical" HorizontalOptions="Start" VerticalOptions="Fill" WidthRequest="100">
+					<Image VerticalOptions="Start" WidthRequest="100" HeightRequest="100" x:Name="logoImage" Source="{Binding Source={x:Reference FacilityInfoViewPage}, Path=photo}"/>
+					<Button Text="Change" Clicked="ChangeLogo"/>
+				</StackLayout>
+				<Grid x:Name="grid" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+					<Grid.RowDefinitions>
+					    <RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+						<Label Text="Facility Name"/>
+                        <Entry AutomationId="FacilityNameEntry" x:Name="facilityName" Placeholder="Name" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=name}">
+							<Entry.Behaviors>
+							    <local:RequiredValidator />
+							</Entry.Behaviors>
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+						<Label Text="In Operation" />
+						<StackLayout Orientation="Horizontal">
+                            <DatePicker AutomationId="InOperationStartDate" x:Name="facilityInOperationStart" Date="{Binding Source={x:Reference FacilityInfoViewPage}, Path=inOperationStart}"/>
+                            <DatePicker AutomationId="InOperationEndDate" x:Name="facilityInOperationEnd" Date="{Binding Source={x:Reference FacilityInfoViewPage}, Path=inOperationEnd}"/>
+						</StackLayout>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+						<Label Text="Description" />
+                        <Editor AutomationId="DescriptionEntry" x:Name="facilityDescription" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=description}" HorizontalOptions="Fill" HeightRequest="300"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+						<Label Text="Terms &amp; Conditions" />
+                        <Editor AutomationId="TermConditionEntry" x:Name="facilityTerms" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=terms}" HorizontalOptions="Fill" HeightRequest="300"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+						<Label Text="Facility Group" />
+						<controls:SegmentedControl x:Name="facilityGroupSegment" TintColor="#007AFF" SelectedSegment="{Binding Source={x:Reference FacilityInfoViewPage}, Path=type}" HorizontalOptions="Fill" HeightRequest="100">
+							<controls:SegmentedControl.Children>
+								<controls:SegmentedControlOption Text="None" />
+							    <controls:SegmentedControlOption Text="A" />
+							    <controls:SegmentedControlOption Text="B" />
+							    <controls:SegmentedControlOption Text="C" />
+								<controls:SegmentedControlOption Text="D" />
+							</controls:SegmentedControl.Children>
+						</controls:SegmentedControl>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+						<Label Text="Equipment" />
+                        <Entry AutomationId="EquipmentEntry" x:Name="facilityEquipment" Placeholder="Equipment" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=equipment}">
+
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="3" Grid.Column="0">
+						<Label Text="Deposit Required" />
+                        <Entry AutomationId="DepositEntry" x:Name="facilityDeposit" Placeholder="" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=deposit}" Keyboard="Numeric">
+							<Entry.Behaviors>
+							    <local:NumberValidatorBehavior />
+							</Entry.Behaviors>
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+						<Label BindingContext="{x:Reference facilityCapacity}"  Text="{Binding Value, StringFormat='Capacity: {0}'}" VerticalOptions="Center" />
+						<Stepper x:Name="facilityCapacity" Minimum="0" Maximum="100" Increment="1" Value="{Binding Source={x:Reference FacilityInfoViewPage}, Path=capacity}" VerticalOptions="Center" />
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="4" Grid.Column="0">
+						<Label Text="Contact Person" />
+                        <Entry AutomationId="ContactEntry" x:Name="facilityContactPerson" Placeholder="" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=contactPerson}" >
+
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="4" Grid.Column="1">
+						<Label Text="Email" />
+                        <Entry AutomationId="EmailEntry" x:Name="facilityEmail" Placeholder="" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=email}" Keyboard="Email">
+							<Entry.Behaviors>
+							    <local:EmailValidatorBehavior />
+							</Entry.Behaviors>
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="5" Grid.Column="0">
+						<Label Text="Phone" />
+                        <Entry AutomationId="PhoneEntry" x:Name="facilityPhone" Placeholder="" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=phone}" Keyboard="Telephone">
+							
+						</Entry>
+					</StackLayout>
+
+					<StackLayout Orientation="Vertical" Grid.Row="5" Grid.Column="1">
+						<Label Text="Fax" />
+                        <Entry AutomationId="FaxEntry" x:Name="facilityFax" Placeholder="" Text="{Binding Source={x:Reference FacilityInfoViewPage}, Path=fax}" Keyboard="Telephone">
+							
+						</Entry>
+					</StackLayout>
+				</Grid>
+			</StackLayout>
+		</ScrollView>
+	</ContentView.Content>
+</ContentView>

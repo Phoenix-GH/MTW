@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyTenantWorld.BookingListPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="BookingList">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="colorConverter"></local:ColorConverter>
+            <local:FirstNameConverter x:Key="firstNameConverter"></local:FirstNameConverter>
+            <local:SecondNameConverter x:Key="secondNameConverter"></local:SecondNameConverter>
+            <local:FirstDisplayConverter x:Key="firstDisplayConverter"></local:FirstDisplayConverter>
+            <local:SecondDisplayConverter x:Key="secondDisplayConverter"></local:SecondDisplayConverter>
+
+            <local:BookingFeeDisplayConverter x:Key="bookingFeeDisplayConverter"></local:BookingFeeDisplayConverter>
+            <local:DepositFeeDisplayConverter x:Key="depositFeeDisplayConverter"></local:DepositFeeDisplayConverter>
+            <local:ImageDisplayConverter x:Key="imageDisplayConverter"></local:ImageDisplayConverter>
+            
+            <DataTemplate x:Key="closedTemplate">
+                <ViewCell Height="55">
+                    <Grid HorizontalOptions="Fill" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding invoiceNo}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding facilityName}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding _bookingDate}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Text="{Binding status}" BorderRadius="3" FontSize="9" Grid.Row="0" Grid.Column="3" BackgroundColor="White"  TextColor="{Binding status, Converter={StaticResource colorConverter}}" BorderColor="{Binding status, Converter={StaticResource colorConverter}}" 
+                            BorderWidth="1" HorizontalOptions="Center" VerticalOptions="Center" IsEnabled="false" HeightRequest="30">
+                             <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Image Source="ic_dropdownlarge_grey.png" Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+               </ViewCell> 
+            </DataTemplate>
+
+            <DataTemplate x:Key="openTemplate">
+                  <ViewCell Height="208">
+                    <Grid HorizontalOptions="Fill" VerticalOptions="FillAndExpand" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="76" />
+                            <RowDefinition Height="76" />
+                          
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding invoiceNo}" x:Name="invoiceNoLabel" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding facilityName}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding _bookingDate}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Text="{Binding status}" BorderRadius="3" FontSize="9" Grid.Row="0" Grid.Column="3" BackgroundColor="White" BorderColor="{Binding status, Converter={StaticResource colorConverter}}" 
+                            TextColor="{Binding status, Converter={StaticResource colorConverter}}" BorderWidth="1" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" IsEnabled="false">
+                             <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+
+                        <Image Source="ic_dropdownlarge_grey.png" Grid.Row="0" Grid.Column="4" RotationX="180" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image Source="{Binding status, Converter={StaticResource imageDisplayConverter}, ConverterParameter={x:Reference Name=invoiceNoLabel}}"  WidthRequest="33" HeightRequest="33" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                        <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                            <Label Text="{Binding bookedBy}" TextColor="#4a4a4a" FontSize="18">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="{Binding unitNo}" TextColor="#4a4a4a" FontSize="12">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+                            <Label Text="{Binding period}" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Start">
+                                 <Label.FontFamily> 
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="{Binding primeTime}" TextColor="#4a4a4a" FontSize="11" Margin="20, 0, 0, 0" HorizontalOptions="StartAndExpand">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End" IsVisible="{Binding status, Converter={StaticResource bookingFeeDisplayConverter}}">
+                                 <Label Text="{Binding bookingFee}" TextColor="#E84D3D" FontSize="18" HorizontalOptions="Center">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text="Booking Fee" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Center">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Row="1" Grid.Column="3" IsVisible="{Binding status, Converter={StaticResource depositFeeDisplayConverter}}">
+                             <Label Text="{Binding deposit}" TextColor="#99C259" FontSize="18" HorizontalOptions="Center">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="Deposit" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Center">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="CenterAndExpand">
+                            <Button Text="{Binding status, Converter={StaticResource firstNameConverter}}" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" BorderRadius ="3" TextColor="White" Clicked="First_Clicked" VerticalOptions="Center" FontSize="10" CommandParameter="{Binding .}" IsVisible="{Binding status, Converter={StaticResource firstDisplayConverter}, ConverterParameter={x:Reference Name=invoiceNoLabel}}">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                            <Button Margin="30, 0, 0, 0" Text="{Binding status, Converter={StaticResource secondNameConverter}}" BackgroundColor="#E84D3D" WidthRequest="153" HeightRequest="35" BorderRadius="3" TextColor="White" Clicked="Second_Clicked" VerticalOptions="Center" FontSize="10" CommandParameter="{Binding .}" IsVisible="{Binding status, Converter={StaticResource secondDisplayConverter}}">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                        </StackLayout>
+                    </Grid>
+               </ViewCell> 
+            </DataTemplate>
+
+            <DataTemplate x:Key="completedTemplate">
+                  <ViewCell Height="146">
+                    <Grid HorizontalOptions="Fill" VerticalOptions="FillAndExpand" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="76" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding invoiceNo}" x:Name="invoiceNoLabel" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding facilityName}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding _bookingDate}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Text="{Binding status}" BorderRadius="3" FontSize="9" Grid.Row="0" Grid.Column="3" BackgroundColor="White" BorderColor="{Binding status, Converter={StaticResource colorConverter}}" 
+                            TextColor="{Binding status, Converter={StaticResource colorConverter}}" BorderWidth="1" HeightRequest="30" HorizontalOptions="Center" VerticalOptions="Center" IsEnabled="false">
+                             <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+
+                        <Image Source="ic_dropdownlarge_grey.png" Grid.Row="0" Grid.Column="4" RotationX="180" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image Source="{Binding status, Converter={StaticResource imageDisplayConverter}, ConverterParameter={x:Reference Name=invoiceNoLabel}}"  WidthRequest="33" HeightRequest="33" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                        <StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                            <Label Text="{Binding bookedBy}" TextColor="#4a4a4a" FontSize="18">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="{Binding unitNo}" TextColor="#4a4a4a" FontSize="12">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="2">
+                            <Label Text="{Binding period}" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Start">
+                                 <Label.FontFamily> 
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="{Binding primeTime}" TextColor="#4a4a4a" FontSize="11" Margin="20, 0, 0, 0" HorizontalOptions="StartAndExpand">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="End" IsVisible="{Binding status, Converter={StaticResource bookingFeeDisplayConverter}}">
+                                 <Label Text="{Binding bookingFee}" TextColor="#E84D3D" FontSize="18" HorizontalOptions="Center">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text="Booking Fee" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Center">
+                                     <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="End" Grid.Row="1" Grid.Column="3" IsVisible="{Binding status, Converter={StaticResource depositFeeDisplayConverter}}">
+                             <Label Text="{Binding deposit}" TextColor="#99C259" FontSize="18" HorizontalOptions="Center">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label Text="Deposit" TextColor="#4a4a4a" FontSize="11" HorizontalOptions="Center">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+               </ViewCell> 
+            </DataTemplate>
+            
+            <local:CellDataTemplateSelector 
+                OpenTemplate="{StaticResource openTemplate}" 
+                ClosedTemplate="{StaticResource closedTemplate}" 
+                CompletedTemplate="{StaticResource completedTemplate}" 
+                x:Key="cellDataTemplateSelector" />
+        </ResourceDictionary>
+        
+    </ContentPage.Resources>
+	<ContentPage.Content>
+        <AbsoluteLayout>
+        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70" />
+                <Label x:Name="pageTitle" Text="Bookings" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <SearchBar x:Name="searchText" Placeholder="Ref. No." HorizontalOptions="End" TextChanged="Search_TextChanged">
+                </SearchBar>
+                <!--<Button Clicked="NewBooking" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="NEW BOOKING" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>-->
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                    <Button x:Name="showAllButton" HorizontalOptions="Fill" Text="ALL" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAll" TextColor="#4a4a4a"/>
+                    <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAll" IsVisible="false"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                    <Button x:Name="showActiveButton"  HorizontalOptions="Fill" Text="ACTIVE" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowActive" TextColor="#E84D3D"/>
+                    <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barActive"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                    <Button x:Name="showCompletedButton" HorizontalOptions="Fill" Text="COMPLETED" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowCompleted" TextColor="#4a4a4a"/>
+                    <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barCompleted" IsVisible="false"/>
+                </StackLayout>
+            </Grid>
+            <!--Filter Bar -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="30,23,30,0">
+                <Image Source="ic_filters.png" />
+               
+                <Picker x:Name="unitPicker" Title="Select Unit" Margin="20,0,0,0" SelectedIndexChanged="Unit_Selected" IsEnabled="false"/>
+                <Label Text="DATE RANGE" VerticalOptions="Center" FontSize="16" TextColor="#4a4a4a" Margin="35,0,0,0">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                 
+                <DatePicker x:Name="bookingStartDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="15,0,0,0" DateSelected="StartDate_Selected"/>
+                <DatePicker x:Name="bookingEndDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="10,0,0,0" DateSelected="EndDate_Selected"/>
+                <Button Clicked="Clear_Filters" BackgroundColor="Transparent"  Margin="15,0,0,0" VerticalOptions="Center" Text="Clear Filters" TextColor="#E84D3D" FontSize="9" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+
+            <ListView x:Name="listView"  ItemTemplate="{StaticResource cellDataTemplateSelector}" ItemSelected="Handle_ItemSelected" HasUnevenRows="true">
+                <ListView.Header>
+                    <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                            <Label Text="Reference" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        CommandParameter="{Binding .}"
+                                        Tapped="SortByInvoiceNo"
+                                        NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                            <Label Text="Facility" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                               <!-- <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        CommandParameter="{Binding .}"
+                                        Tapped="SortByFacilityName"
+                                        NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>-->
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFacilityArrow" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                            <Label Text="Date" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                                <!--<Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        CommandParameter="{Binding .}"
+                                        Tapped="SortByPeriod"
+                                        NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>-->
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByPeriodArrow" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                            <Label Text="Status" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+        <!--                        <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        CommandParameter="{Binding .}"
+                                        Tapped="SortByFee"
+                                    NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>-->
+                            </Label>
+                            <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFeeArrow" />
+                        </StackLayout>
+
+                    </Grid>
+                </ListView.Header>
+            </ListView>
+        </StackLayout>
+            <StackLayout x:Name="reservationCancelModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Reservation Cancelled" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                   <Label FontSize="15" HorizontalOptions="Center" Text="You have successfully cancelled the reservation" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 68, 0, 0">
+                        <Button Clicked="ConfirmReservationCancel" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="OK" TextColor="White" FontSize="10" HorizontalOptions="Center" Margin="0, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+             <!-- Refund dialog -->
+            <StackLayout x:Name="refundModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Do you want to refund?" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label FontSize="15" HorizontalOptions="Center" Text="The deposit will be released to resident's account" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 68, 0, 0">
+                        <Button Clicked="CancelRefund" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="CANCEL" TextColor="White" FontSize="10" HorizontalOptions="Start" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Button Clicked="ConfirmRefund" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="OK" TextColor="White" FontSize="10" HorizontalOptions="End" Margin="50, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <!-- Private booking cancel dialog -->
+            <StackLayout x:Name="bookingCancelModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Do you want to cancel?" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label FontSize="15" HorizontalOptions="Center" Text="This will cancel the private booking for management" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 68, 0, 0">
+                        <Button Clicked="NoCancelBooking" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="DON'T CANCEL" TextColor="White" FontSize="10" HorizontalOptions="Start" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Button Clicked="ConfirmBookingCancel" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="CANCEL BOOKING" TextColor="White" FontSize="10" HorizontalOptions="End" Margin="50, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <!-- Forfeit dialog -->
+            <StackLayout x:Name="forfeitModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Forfeit deposit?" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label FontSize="15" HorizontalOptions="Center" Text="Enter reason for forfeiture" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Editor WidthRequest="336" HorizontalOptions="Center" Margin="0, 30, 0, 0" HeightRequest="123" x:Name="forfeitReasonText" TextColor="#4a4a4a" BackgroundColor="White" FontSize="11">
+                        <Editor.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Editor.FontFamily>
+                    </Editor>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 30, 0, 0">
+                        <Button Clicked="CancelForfeit" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="CANCEL" TextColor="White" FontSize="10" HorizontalOptions="Start" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Button Clicked="ConfirmForfeit" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="OK" TextColor="White" FontSize="10" HorizontalOptions="End" Margin="50, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout x:Name="forfeitConfirmModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Deposit forfeited" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                   <Label FontSize="15" HorizontalOptions="Center" Text="The deposit has been forfeited" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 68, 0, 0">
+                        <Button Clicked="CancelForfeitConfirm" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="OK" TextColor="White" FontSize="10" HorizontalOptions="Center" Margin="0, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference BookingList}, Path=isBusy}" IsRunning="{Binding Source={x:Reference BookingList}, Path=isBusy}" />
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.ResetPage" xmlns:abstractions="clr-namespace:RoundedBoxView.Forms.Plugin.Abstractions;assembly=RoundedBoxView.Forms.Plugin.Abstractions" xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld">
+	<ContentPage.Content>
+		<AbsoluteLayout>
+			<Image x:Name="bgImage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+	            Source = "BG2.jpg" Aspect="AspectFill" VerticalOptions="Fill" HorizontalOptions="Fill"/>
+			<ScrollView>
+				<Grid x:Name="grid" HorizontalOptions="Fill" VerticalOptions="Fill"  AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+					<Grid.RowDefinitions>
+				    <RowDefinition Height="140" />
+				    <RowDefinition Height="Auto" />
+				    <RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+				    <ColumnDefinition Width="*" />
+				    <ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+		        <StackLayout Orientation="Horizontal" VerticalOptions="End" Grid.Row="0" Grid.Column="1">
+					<Image VerticalOptions="Center" Source="Arrow.png" HorizontalOptions="End" Margin="0,0,12,0" RotationY="180"/>
+					<Button Text="GO BACK" TextColor="#ffffff" Clicked="OnGoBackClicked" FontSize="12" BackgroundColor="Transparent">
+						<Button.FontFamily>
+							<OnPlatform x:TypeArguments="x:String">
+					            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+					            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+					            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+					        </OnPlatform>
+						</Button.FontFamily>
+					</Button>
+				</StackLayout>
+				<abstractions:RoundedBoxView Grid.Row="1" Grid.Column="1" BackgroundColor="White" 
+		   				BorderColor="#979797" CornerRadius="5" BorderThickness="3" />
+				<StackLayout Orientation="Vertical" Grid.Row="1" Grid.Column="1" Padding="40">
+					<Image HorizontalOptions="Center" Source="Key_large.png" />
+					<Label Text="Reset Successful" TextColor="#4a4a4a" FontSize="30" HorizontalOptions="Center" Margin="0,40,0,0">
+						<Label.FontFamily>
+							<OnPlatform x:TypeArguments="x:String">
+					            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+					            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+					            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+					        </OnPlatform>
+						</Label.FontFamily>
+					</Label>
+						
+					<BoxView BackgroundColor="#cd6732" HeightRequest="4.5" HorizontalOptions="Center" WidthRequest="67.36"/>	
+						
+					<Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Margin="0,40,0,0">
+						<Grid.RowDefinitions>
+						    <RowDefinition Height="Auto" />
+						    <RowDefinition Height="40" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+				
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.Row="0" Grid.Column="0" Text="An email has been sent to you containing your new password." TextColor="#9b9b9b" FontSize="18" HorizontalOptions="Fill" LineBreakMode="WordWrap" VerticalOptions="Fill">
+							<Label.FontFamily>
+								<OnPlatform x:TypeArguments="x:String">
+						            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+						            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+						            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+						        </OnPlatform>
+							</Label.FontFamily>
+						</Label>
+							
+						<abstractions:RoundedBoxView Grid.Row="1" Grid.Column="0" BackgroundColor="#CD6732" 
+			   				CornerRadius="8" BorderThickness="1">
+							</abstractions:RoundedBoxView>
+						<StackLayout x:Name="backToLoginButton" Orientation = "Horizontal" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand">
+							<Label Text="GO BACK TO LOGIN" TextColor="White" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="114,0,0,0" FontSize="12">
+								<Label.FontFamily>
+									<OnPlatform x:TypeArguments="x:String">
+							            <OnPlatform.iOS>Lato-Black</OnPlatform.iOS>
+							            <OnPlatform.Android>Lato-Black.ttf#Lato-Black</OnPlatform.Android>
+							            <OnPlatform.WinPhone></OnPlatform.WinPhone>
+							        </OnPlatform>
+								</Label.FontFamily>
+							</Label>
+							<Image VerticalOptions="Center" Source="Arrow.png" HorizontalOptions="End" Margin="0,0,20,0" />
+						</StackLayout>
+							
+					</Grid>
+					</StackLayout>
+				</Grid>
+			</ScrollView>
+		</AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

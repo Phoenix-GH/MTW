@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.ReceiptsRefundsPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="ReceiptsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ButtonVisibleConverter x:Key="buttonVisibleConverter"></local:ButtonVisibleConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference ReceiptsPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference ReceiptsPage}, Path=isBusy}" WidthRequest="50" HeightRequest="50"/>
+            <StackLayout Orientation="Vertical" VerticalOptions="Fill"  AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72" VerticalOptions="Start">
+                    <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                    <Label x:Name="pageTitle" Text="Receipts &amp; Refunds" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <SearchBar x:Name="searchText" Placeholder="Receipt No." HorizontalOptions="End" TextChanged="Search_TextChanged">
+                        </SearchBar>
+                </StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="showAllButton" HorizontalOptions="Fill" Text="ALL" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAll"  TextColor="#E84D3D"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAll" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="showReceiptsButton"  HorizontalOptions="Fill" Text="RECEIPTS" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowReceipts" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barReceipts" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="showRefundsButton" HorizontalOptions="Fill" Text="REFUNDS" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowRefunds" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barRefunds" IsVisible="false"/>
+                    </StackLayout>
+                </Grid>
+                <!--Filter Bar -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Start" Padding="30,23,30,0">
+                    <Image Source="ic_filters.png" />
+                   
+                    <Picker x:Name="blockPicker" Title="All blocks" Margin="20,0,0,0" SelectedIndexChanged="Block_Selected" IsEnabled="false"/>
+                    <Label Text="DATE RANGE" VerticalOptions="Center" FontSize="16" TextColor="#4a4a4a" Margin="35,0,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                     
+                    <DatePicker x:Name="bookingStartDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="15,0,0,0" DateSelected="StartDate_Selected"/>
+                    <DatePicker x:Name="bookingEndDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="10,0,0,0" DateSelected="EndDate_Selected"/>
+                    <Button Clicked="Clear_Filters" BackgroundColor="Transparent"  Margin="15,0,0,0" VerticalOptions="Center" Text="Clear Filters" TextColor="#E84D3D" FontSize="9" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+
+                <ListView x:Name="listView" VerticalOptions="FillAndExpand">
+                    <ListView.Header>
+                        <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                <Label Text="Receipt no" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                <Label Text="Date" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFacilityArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                <Label Text="Amount" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByUnitNoArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                <Label Text="Resident" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByBookedByArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4" HeightRequest="29">
+                                <Label Text="Type" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByPeriodArrow" />
+                            </StackLayout>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="55">
+                                <Grid HorizontalOptions="Fill" Padding="14, 0, 13, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="3*" />
+
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding transactionNo}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding _transactionDate}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding transactionAmount, StringFormat='${0}'}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Label Text="{Binding resident}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="3" VerticalOptions="Center">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4">
+                                        <Label Text="{Binding transactionType}" TextColor="#4a4a4a" FontSize="11" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                             <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
+                                        <Button HeightRequest="35" Margin="0,0,0,0" WidthRequest="110" BorderRadius="3" Text="{Binding _actionType}" IsVisible="{Binding _actionType, Converter={StaticResource buttonVisibleConverter}}" BackgroundColor="#99C259"  FontSize="9" Grid.Row="0" Grid.Column="5" VerticalOptions="Center" HorizontalOptions="End" TextColor="White" Clicked="Handle_Clicked" CommandParameter="{Binding .}">
+                                             <Button.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String">
+                                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                </OnPlatform>
+                                            </Button.FontFamily>
+                                        </Button>
+                                    </StackLayout>
+                                </Grid>
+                           </ViewCell> 
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout Orientation="Horizontal" BackgroundColor="#EAEAEA" HeightRequest="62" HorizontalOptions="Fill" VerticalOptions="End">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="CreateReceipt"
+                                    NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <Image VerticalOptions="Center" Source="ic_action_create_receipt.png" />
+                            <Label FontSize="13" TextColor="#E74C3C" Text="CREATE RECEIPT" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="CreateRefund"
+                                    NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                            <Image VerticalOptions="Center" Source="ic_action_create_refund.png" />
+                            <Label FontSize="13" TextColor="#E74C3C" Text="CREATE REFUND" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                </StackLayout>
+                <StackLayout x:Name="confirmModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                    <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                        <Label FontSize="30" HorizontalOptions="Center" Text="Do you want to refund?" TextColor="White">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label FontSize="15" HorizontalOptions="Center" Text="A refund voucher for the booking deposit will be created" TextColor="White" Margin="0,5,0,0">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 32, 0, 0">
+                            <Button Clicked="Cancel" BackgroundColor="##99C259" WidthRequest="153" HeightRequest="35" Text="Cancel" TextColor="White" FontSize="10" HorizontalOptions="Start" BorderRadius="3">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                            <Button Clicked="AcceptRefund" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="YES, REFUND" TextColor="White" FontSize="10" HorizontalOptions="End" Margin="50, 0, 0, 0" BorderRadius="3">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Button.FontFamily>
+                            </Button>
+                            
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+
+</ContentPage>

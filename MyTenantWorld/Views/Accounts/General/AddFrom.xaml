@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.AddFrom">
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+			<StackLayout Orientation = "Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="60" BackgroundColor = "#2196F3">
+				<SearchBar HorizontalOptions="StartAndExpand" Placeholder="Search username or email" x:Name="searchBar" TextChanged="Handle_TextChanged"/>
+				<Button Clicked="Cancel_Clicked" Text="Cancel" HorizontalOptions="End"/>
+			</StackLayout>
+			<ScrollView VerticalOptions="FillAndExpand">
+				<ListView HorizontalOptions="Fill" x:Name="listView">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+						   	<ViewCell> 
+						      	<StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Orientation="Horizontal">
+								<Image WidthRequest="40" HeightRequest="50" Source="Key.png"/>
+								<StackLayout Orientation="Vertical">
+					        		<Label Text="{Binding userName}" HeightRequest="30"/>
+									<Label Text="{Binding userGroup}" HeightRequest="20"/>
+								</StackLayout>
+								</StackLayout>
+						   	</ViewCell> 
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+			</ScrollView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

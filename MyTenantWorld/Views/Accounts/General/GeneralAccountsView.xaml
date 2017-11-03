@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.GeneralAccountsView" 
+	xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+	x:Name="GeneralAccountsViewPage">
+	<ContentView.Content>
+		<StackLayout Orientation="Vertical" VerticalOptions="Fill">
+			<StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Start">
+				<StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+					<Button Text="&lt;" Clicked="PreviousBlock" />
+					<!--<Label BindingContext="{x:Reference blockNameLabel}" Text="{Binding Text}"/>-->
+					<Button Text="&gt;" Clicked="NextBlock" />
+				</StackLayout>
+				<SearchBar x:Name="unitSearchBar" HorizontalOptions="End" TextChanged="Search_TextChanged" />
+			</StackLayout>
+			<controls:CarouselViewControl x:Name="carouselView" Position="0" Orientation="Horizontal" InterPageSpacing="10" HorizontalOptions="Fill" VerticalOptions="FillAndExpand" IsSwipingEnabled="true" ItemsSource="{Binding unitItems}" ShowIndicators="true" IndicatorsTintColor="Blue">
+		
+				<controls:CarouselViewControl.ItemTemplate>
+					<DataTemplate>
+						
+						<Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="2*" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Label x:Name="blockNameLabel" Text="{Binding title}" Grid.Row="0" Grid.Column="0" IsVisible="false" />
+							<ListView x:Name="blockListView" Grid.Row="1" Grid.Column="0" ItemTapped="BlockList_Tapped" ItemsSource="{Binding floors}" HeightRequest="200">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<TextCell Height="60" Text="{Binding .}">
+										</TextCell>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
+							<ListView x:Name="unitListView" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding selectedUnits}" ItemTapped="UnitList_ItemTapped"  VerticalOptions="Fill">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+										<TextCell Height="60" Text="{Binding unitNo}">
+										</TextCell>
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
+							<ListView x:Name="userListView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding residents}" ItemTapped="ResidentList_ItemTapped"  VerticalOptions="Fill">
+								<ListView.ItemTemplate>
+									<DataTemplate>
+									   	<ViewCell> 
+									      	<StackLayout HorizontalOptions="Fill" VerticalOptions="Fill" Orientation="Horizontal">
+											<Image WidthRequest="40" HeightRequest="50" Source="Key.png"/>
+											<StackLayout Orientation="Vertical">
+								        		<Label Text="{Binding userName}" HeightRequest="30"/>
+												<Label Text="{Binding userGroup}" HeightRequest="20"/>
+											</StackLayout>
+											</StackLayout>
+									   	</ViewCell> 
+									</DataTemplate>
+								</ListView.ItemTemplate>
+							</ListView>
+						</Grid>
+					</DataTemplate>
+				</controls:CarouselViewControl.ItemTemplate>
+			</controls:CarouselViewControl>
+			<StackLayout Orientation="Horizontal" VerticalOptions="End">
+				<Button HorizontalOptions="Center" VerticalOptions="End" HeightRequest="50" Text="ADD NEW" Clicked="AddNewUser" />
+				<Button HorizontalOptions="Center" VerticalOptions="End" HeightRequest="50" Text="ADD FROM" Clicked="AddFrom" />
+			</StackLayout>
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>

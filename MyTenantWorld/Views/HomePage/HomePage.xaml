@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.HomePage">
+	<ContentPage.Content>
+		<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="FillAndExpand" BackgroundColor="#f6f9fa">
+			<StackLayout Orientation = "Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="71" BackgroundColor = "White" VerticalOptions="Start">
+                <Button Image="ic_hamburger.png" HorizontalOptions="Start" VerticalOptions="Center" Clicked="Handle_Clicked" BackgroundColor="Transparent" Margin="15, 0, 0, 0" WidthRequest="43" HeightRequest="70"/>
+                    <Label Text="My Dashboard" TextColor="#4a4a4a" FontSize="21" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+				<Picker Title="Pick a profile" x:Name="ProfilePicker" HorizontalOptions="End" VerticalOptions="Center" SelectedIndexChanged="Handle_SelectedIndexChanged" WidthRequest="300"/>
+
+			</StackLayout>
+			<ScrollView VerticalOptions="StartAndExpand">
+				<Grid HorizontalOptions="Fill" VerticalOptions="Start" ColumnSpacing="30" RowSpacing="30" Margin="30,20,30,20">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="148" />
+						<RowDefinition Height="148" />
+						<RowDefinition Height="148" />
+						<RowDefinition Height="90" />
+					</Grid.RowDefinitions>
+                    
+                    <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Padding="30, 0, 30, 0" CornerRadius="3">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Tapped="OpenBookings"
+                                            NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            <Image Source="ic_bookings.png" VerticalOptions="Center" WidthRequest="47" HeightRequest="42" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Tapped="OpenBookings"
+                                            NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label FontSize="30" TextColor="#4a4a4a" VerticalOptions="Center" HorizontalOptions="Start" x:Name="unPaidBookingsLabel">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" TextColor="#4a4a4a" VerticalOptions="Center" Margin="10, 0, 0, 0" Text="UNPAID BOOKINGS"  HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="End">
+                                <Button x:Name="managementButton" FontSize="10" Clicked="OpenManagement" Text="Book Management" BorderRadius="3" BorderColor="#33e84d3d" WidthRequest="153" HeightRequest="35" TextColor="#333B4A" BackgroundColor="White" BorderWidth="1">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                                <Button x:Name="bookTenantsButton" FontSize="10" Clicked="OpenBookResident" Text="Book Tenant" BorderRadius="3" BorderColor="#33e84d3d" WidthRequest="153" HeightRequest="35" TextColor="#333B4A" BackgroundColor="White" BorderWidth="1">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="0" Grid.Column="2" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenFeedback"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                         
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_star.png"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="30" VerticalOptions="Center" x:Name="pendingFeedbackLabel" TextColor="#4a4a4a">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" Text="PENDING FEEDBACK" VerticalOptions="Center"  Margin="10, 0, 0, 0" WidthRequest="85">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                     <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="30, 0, 30, 0">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Tapped="OpenNews"
+                                            NumberOfTapsRequired="1" />
+                                </StackLayout.GestureRecognizers>
+                            <Image Source="ic_news.png" VerticalOptions="Center" HorizontalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Tapped="OpenNews"
+                                            NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <Label FontSize="30" TextColor="#4a4a4a" VerticalOptions="Center" HorizontalOptions="Start" x:Name="newsItemsLabel">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" Text="NEWS ITEMS THIS WEEK"  TextColor="#4a4a4a" VerticalOptions="Center" Margin="10, 0, 0, 0" HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="End">
+                                <Button  Clicked="CreateNews" Text="CREATE NEWS" BorderRadius="3" BorderColor="#33e84d3d" WidthRequest="153" HeightRequest="35" TextColor="#333B4A" BackgroundColor="White" BorderWidth="1" FontSize="10">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    
+                    <Frame Grid.Row="1" Grid.Column="2" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenVisitors"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                         
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_visitors.png"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="30" VerticalOptions="Center"  TextColor="#4a4a4a">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" Text="VISITORS TODAY" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                     <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="30, 0, 30, 0" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                            Tapped="OpenEvents"
+                                            NumberOfTapsRequired="1" />
+                                </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="ic_events.png"  VerticalOptions="Center" HorizontalOptions="Start">
+                                
+                            </Image>
+                            <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                            <Label FontSize="30" TextColor="#4a4a4a" VerticalOptions="Center" HorizontalOptions="Start">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Label FontSize="12" Text="NEW REGISTRATION" TextColor="#4a4a4a" VerticalOptions="Center" Margin="10, 0, 0, 0" HorizontalOptions="StartAndExpand" LineBreakMode="WordWrap">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                                </StackLayout>
+                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="End">
+                                <Button  Clicked="OpenManagement" Text="CREATE EVENTS" BorderRadius="3" BorderColor="#33e84d3d" WidthRequest="153" HeightRequest="35" TextColor="#333B4A" BackgroundColor="White" BorderWidth="1" FontSize="10" >
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                                <Button  Clicked="OpenManagement" Text="LIST EVENTS" BorderRadius="3" BorderColor="#33e84d3d" WidthRequest="153" HeightRequest="35"  TextColor="#333B4A" BackgroundColor="White" BorderWidth="1" FontSize="10">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Button.FontFamily>
+                                </Button>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    
+                    <Frame Grid.Row="2" Grid.Column="2" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenApplications"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                         
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_pendingapp.png"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="30" VerticalOptions="Center" x:Name="pendingApplicationsLabel"  TextColor="#4a4a4a">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label FontSize="12" Text="PENDING APPLICATIONS" VerticalOptions="Center" Margin="10, 0, 0, 0" WidthRequest="85" LineBreakMode="WordWrap">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="0" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenAccounts"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_pendingapp.png"/>
+                            <Label FontSize="12" VerticalOptions="Center" Margin="14, 0, 0,0" Text="USERS">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="1" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenReceipts"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_receipts.png"/>
+                            <Label FontSize="12" VerticalOptions="Center" Margin="14, 0, 0,0" Text="RECEIPTS &amp; REFUNDS">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="2" CornerRadius="3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                    Tapped="OpenFiles"
+                                    NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="ic_files.png"/>
+                            <Label FontSize="12" VerticalOptions="Center" Margin="14, 0, 0,0" Text="FILES">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                        </StackLayout>
+                    </Frame>
+                    
+				</Grid>
+			</ScrollView>
+            <Image x:Name="bannerImage" HorizontalOptions="Fill" VerticalOptions="End" HeightRequest="251" Aspect="AspectFill"/>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

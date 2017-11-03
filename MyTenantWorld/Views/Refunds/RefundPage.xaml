@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.RefundPage"
+    xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="FullRefundPage">
+	<ContentPage.Content>
+        <AbsoluteLayout>
+        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" Text = "Cancel Payment" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <Button Clicked="Confirm" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="Confirm" TextColor="White" FontSize="10" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>   
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+
+            <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="#F6F9FA">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+                    <Image VerticalOptions="Start" HorizontalOptions="Fill" HeightRequest="161" Aspect="AspectFill" Source="{Binding Source={x:Reference FullRefundPage}, Path=facilityImage}" />
+                    <Image HorizontalOptions="Center" WidthRequest="58" HeightRequest="58" Margin="0,-29,0,0"  />
+                    <Label Text ="{Binding Source={x:Reference FullRefundPage}, Path=tenantName}" FontSize="16" HorizontalOptions="Center" TextColor="#4a4a4a">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label Text ="{Binding Source={x:Reference FullRefundPage}, Path=blockUnitName}" HorizontalOptions="Center" FontSize="11" TextColor="#4a4a4a">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Vertical" Padding="30,30, 30, 0">
+                        <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                <Label Text="Reference" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                  
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                <Label Text="Description" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFacilityArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                <Label Text="Type" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByUnitNoArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                <Label Text="Amount" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                   
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByBookedByArrow" />
+                            </StackLayout>
+                        </Grid>
+                        <ListView x:Name="listView" ItemsSource="{Binding Source={x:Reference FullRefundPage}, Path=receiptDetailList}" RowHeight="55">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell Height="55">
+                                        <Grid HorizontalOptions="Fill" Padding="14, 0, 13, 0" BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="*" />
+
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding refNo}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                                                 <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Label Text="{Binding description}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                                                 <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Label Text="{Binding type}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                                                 <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+                                            <Label Text="{Binding amount, StringFormat='${0}'}" TextColor="#4a4a4a" FontSize="11" Grid.Row="0" Grid.Column="3" VerticalOptions="Center">
+                                                 <Label.FontFamily>
+                                                    <OnPlatform x:TypeArguments="x:String">
+                                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                                    </OnPlatform>
+                                                </Label.FontFamily>
+                                            </Label>
+
+                                        </Grid>
+                                   </ViewCell> 
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Label x:Name="totalLabel" Text="{Binding Source={x:Reference FullRefundPage}, Path=totalPayment, StringFormat='Total: ${0}'}" HorizontalOptions="End" Margin="0,0,37,0" TextColor="#4a4a4a">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                    </StackLayout>
+                    <Frame BackgroundColor="White" Margin="30, 30, 30, 11" Padding="30, 26, 30, 30">
+                        <StackLayout Orientation="Vertical">
+                            <Label FontSize="16" TextColor="#4a4a4a" Text="Remarks">
+                                 <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                        <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
+                            <Editor HeightRequest = "123" x:Name = "remarksText" HorizontalOptions="Fill" />
+                            <Grid HorizontalOptions="Fill" VerticalOptions="Start" Margin="0,20,0,0" ColumnSpacing="30" RowSpacing="35">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label FontSize="16" TextColor="#4a4a4a" Text="Payment Method" Grid.Row="0" Grid.Column="0">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <controls:SegmentedControl x:Name="paymentSegment" TintColor="#007AFF" SelectedSegment="0" HorizontalOptions="Fill" HeightRequest="30" VerticalOptions="Start" Grid.Row="1" Grid.Column="0" >
+                                </controls:SegmentedControl>
+
+                                <StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="0">
+                                    <Label FontSize="16" TextColor="#4a4a4a" Text="Cheque Number">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Entry x:Name="checkNumberText" Placeholder="Enter number" Text="{Binding Source={x:Reference FullRefundPage}, Path=checkNumber}" />
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+                                    <Label FontSize="16" TextColor="#4a4a4a" Text="Bank">
+                                         <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Entry x:Name="bankText" Placeholder="Enter bank" Text="{Binding Source={x:Reference FullRefundPage}, Path=bank}"/>
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" BackgroundColor="#EAEAEA" HeightRequest="62" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Image VerticalOptions="Center" Source="ic_print.png" />
+                    <Label FontSize="13" TextColor="#E74C3C" Text="PRINT" VerticalOptions="Center" Margin="11, 0, 0, 0">
+                         <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+            <!-- Private booking cancel dialog -->
+            <StackLayout x:Name="bookingCancelModal" AbsoluteLayout.LayoutBounds="0.0, 0.0, 1, 1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="#D92b333b" Orientation="Vertical" IsVisible="false">
+                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                    <Label FontSize="30" HorizontalOptions="Center" Text="Do you want to cancel?" TextColor="White">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <Label FontSize="15" HorizontalOptions="Center" Text="This will cancel the private booking for management" TextColor="White" Margin="0,5,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0, 68, 0, 0">
+                        <Button Clicked="NoCancelBooking" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="DON'T CANCEL" TextColor="White" FontSize="10" HorizontalOptions="Start" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                        <Button Clicked="ConfirmBookingCancel" BackgroundColor="#99C259" WidthRequest="153" HeightRequest="35" Text="CANCEL BOOKING" TextColor="White" FontSize="10" HorizontalOptions="End" Margin="50, 0, 0, 0" BorderRadius="3">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

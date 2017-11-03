@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.FacilityRulesView"
+	x:Name="FacilityRulesViewPage"
+	xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    >
+	<ContentPage.Resources>
+        <ResourceDictionary>
+            <local:SlotsPluralConverter x:Key="slotconverter"></local:SlotsPluralConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentView.Content>
+		<ScrollView VerticalOptions="StartAndExpand">
+			<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="10,40,10,0">
+				<Grid x:Name="grid" HorizontalOptions="Fill">
+					<Grid.RowDefinitions>
+					    <RowDefinition Height="Auto" />
+
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+					    <ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+						<Label BindingContext="{x:Reference earliestStepper}" Text="{Binding Value, StringFormat='{0}'}" />
+<!--						<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_MinType}"/>-->
+                        <Label Text="Weeks"/>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+						<Label BindingContext="{x:Reference latestStepper}" Text="{Binding Value, StringFormat='{0}'}" />
+						<!--<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_MaxType}"/>-->
+                        <Label Text="Days"/>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+						<Label BindingContext="{x:Reference cancellationStepper}" Text="{Binding Value, StringFormat='{0}'}"  />
+<!--						<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=cancel_BookingType}"/>-->
+                        <Label Text="Days"/>
+					</StackLayout>
+					<Stepper x:Name="earliestStepper" Minimum="0" Maximum="100" Increment="1" Value="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_Min}" Grid.Row="1" Grid.Column="0" />
+					<Stepper x:Name="latestStepper" Minimum="0" Maximum="100" Increment="1" Value="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_Max}" Grid.Row="1" Grid.Column="1"/>
+					<Stepper x:Name="cancellationStepper" Minimum="0" Maximum="100" Increment="1" Value="{Binding Source={x:Reference FacilityRulesViewPage}, Path=cancel_Booking}" Grid.Row="1" Grid.Column="2"/>
+                    <local:GradientViewRender HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="4" x:Name="gradientView" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                    </local:GradientViewRender>
+                    <Button HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20" HeightRequest="20" BackgroundColor="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_Min}" Margin="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_Min}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderRadius="10"/>
+                    <Button HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20" HeightRequest="20" BackgroundColor="{Binding Source={x:Reference FacilityRulesViewPage}, Path=advance_Booking_Max}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderRadius="10"/>
+                    <Button HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20" HeightRequest="20" BackgroundColor="{Binding Source={x:Reference FacilityRulesViewPage}, Path=cancel_Booking}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" BorderRadius="10"/>
+                    
+				</Grid>
+				<TableView Intent="Settings" HorizontalOptions="Fill" Margin="0, 30, 0, 0">
+				    <TableRoot>
+				        <TableSection>
+							<ViewCell>
+								<StackLayout Orientation="Horizontal" > 
+									<StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+										<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_Booking, Converter={StaticResource slotconverter},
+                 ConverterParameter='slot', StringFormat='Limit {0} '}" VerticalOptions="Center"/>
+										<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_BookingType, StringFormat='per {0}'}"  VerticalOptions="Center"/>
+									</StackLayout>
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Within Group" VerticalOptions="Center" />
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_BookingWithinGrp}" />
+									</StackLayout>
+
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Enable" VerticalOptions="Center"/>
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=enable_Max_Booking}" />
+									</StackLayout>
+									
+								</StackLayout>
+							</ViewCell>
+
+							<ViewCell>
+								<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Converter={StaticResource slotconverter},
+                 ConverterParameter='slot', Path=slot_Limit, StringFormat='Limit to {0} per unit at any one time'}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+							</ViewCell>
+							
+							<ViewCell>
+								<StackLayout Orientation="Horizontal"> 
+									<StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+										<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_Prime_Booking,Converter={StaticResource slotconverter},
+                 ConverterParameter='prime slot' StringFormat='Limit to {0} '}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+										<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_Prime_BookingType, StringFormat='per {0}'}"  VerticalOptions="Center"/>
+									</StackLayout>
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Within Group" VerticalOptions="Center"/>
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=max_Prime_BookingWithinGrp}" />
+									</StackLayout>
+
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End" IsVisible="false"> 
+										<Label Text="Enable" VerticalOptions="Center"/>
+										<Switch />
+									</StackLayout>
+									
+								</StackLayout>
+							</ViewCell>
+
+							<ViewCell>
+								<StackLayout Orientation="Horizontal"> 
+									<Label Text="Allow consecutive booking across slots" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Enable" VerticalOptions="Center"/>
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=allow_Consecutive}"/>
+									</StackLayout>
+									
+								</StackLayout>
+							</ViewCell>
+
+							<ViewCell>
+								<StackLayout Orientation="Horizontal"> 
+									<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=booking_SameType, StringFormat='Cannot book another facility on {0}'}"  HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Within Group" VerticalOptions="Center" />
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=booking_SameWithinGrp}" />
+									</StackLayout>
+
+									<StackLayout Orientation="Horizontal" HorizontalOptions="End"> 
+										<Label Text="Enable" VerticalOptions="Center"/>
+										<Switch IsToggled="{Binding Source={x:Reference FacilityRulesViewPage}, Path=booking_Same}" />
+									</StackLayout>
+									
+								</StackLayout>
+							</ViewCell>
+
+							<ViewCell>
+								<StackLayout Orientation="Horizontal">
+									<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=auto_Cancellation, StringFormat='Booking expires after {0}'}"  HorizontalOptions="Start" VerticalOptions="Center"/>
+									<Label Text="{Binding Source={x:Reference FacilityRulesViewPage}, Path=auto_CancellationType, StringFormat='{0} without payment'}" VerticalOptions="Center"/>
+								</StackLayout>
+							</ViewCell>
+				        </TableSection>
+				    </TableRoot>
+				</TableView>
+				
+			</StackLayout>
+		</ScrollView>
+	</ContentView.Content>
+</ContentView>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyTenantWorld.AuditPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="AuditDisplayPage">
+
+	<ContentPage.Content>
+         <AbsoluteLayout>
+        <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                <Label x:Name="pageTitle" Text ="Audit" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+            </StackLayout>
+            <!--Filter Bar -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="30,23,30,0">
+                <Image Source="ic_filters.png" />
+                <Label Text="DATE RANGE" VerticalOptions="Center" FontSize="16" TextColor="#4a4a4a" Margin="35,0,0,0">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                 
+                <DatePicker x:Name="bookingStartDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="15,0,0,0" DateSelected="StartDate_Selected"/>
+                <DatePicker x:Name="bookingEndDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="10,0,0,0" DateSelected="EndDate_Selected"/>
+                <Button Clicked="Clear_Filters" BackgroundColor="Transparent"  Margin="15,0,0,0" VerticalOptions="Center" Text="Clear Filters" TextColor="#E84D3D" FontSize="9" HorizontalOptions="End">
+                    <Button.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                        </OnPlatform>
+                    </Button.FontFamily>
+                </Button>
+            </StackLayout>
+            <ListView VerticalOptions="FillAndExpand" x:Name="listView" IsGroupingEnabled="true" GroupDisplayBinding="{Binding header}" HasUnevenRows="true" ItemSelected="Handle_ItemSelected">
+
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="29">
+                            <StackLayout BackgroundColor="#505050">
+                                <Label Text="{Binding header}" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center" Margin="15, 0, 0, 0">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="10" Margin="20, 20, 20, 20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33"/>
+                                   
+                                </Grid.RowDefinitions>
+                                <Label Text = "{Binding date}" FontSize="15"  TextColor="#4a4a4a" Grid.Row="0" Grid.Column="1">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text = "{Binding timeList}" VerticalOptions="Start" FontSize="11"  HorizontalOptions="End" TextColor="#4a4a4a" Grid.Row="1" Grid.Column="0">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Label Text = "{Binding descriptionList}" VerticalOptions="Start" FontSize="11"  HorizontalOptions="StartAndExpand" TextColor="#4a4a4a" Grid.Row="1" Grid.Column="1">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                            </Grid>
+                           
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference AuditDisplayPage}, Path=isBusy}" IsRunning="{Binding Source={x:Reference AuditDisplayPage}, Path=isBusy}" WidthRequest="50" HeightRequest="50"/>
+        </AbsoluteLayout>
+	</ContentPage.Content>
+</ContentPage>

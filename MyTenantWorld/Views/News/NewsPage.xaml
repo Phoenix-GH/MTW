@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyTenantWorld.NewsPage" 
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    x:Name="NewsList">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="closedTemplate">
+                <ViewCell Height="55">
+                    <Grid HorizontalOptions="Fill" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding imagePath}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" WidthRequest="35" HeightRequest="35">
+                        </Image>
+                        <Label Text="{Binding title}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding effectivePeriod}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding visibility}" FontSize="12" Grid.Row="0" Grid.Column="3"  TextColor="#4a4a4a" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}" Grid.Row="0" Grid.Column="4">
+                                </Button>
+                    </Grid>
+               </ViewCell> 
+            </DataTemplate>
+
+            <DataTemplate x:Key="openTemplate">
+                  <ViewCell Height="208">
+                    <Grid HorizontalOptions="Fill" VerticalOptions="FillAndExpand" Padding="15, 0, 15, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="68.5" />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding imagePath}" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" WidthRequest="35" HeightRequest="35">
+                        </Image>
+                        <Label Text="{Binding title}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding effectivePeriod}" TextColor="#4a4a4a" FontSize="12" Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding visibility}" FontSize="12" Grid.Row="0" Grid.Column="3"  VerticalOptions="Center" TextColor="#4a4a4a">
+                             <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}" Grid.Row="0" Grid.Column="4">
+                                </Button>
+                        
+                        <Label Text="{Binding message}" TextColor="#4a4a4a" FontSize="12" Grid.Row="1" Grid.Column="1">
+                             <Label.FontFamily> 
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                        <Label Text="{Binding blockList}" TextColor="#99C158" FontSize="12" Grid.Row="2" Grid.Column="1" >
+                             <Label.FontFamily> 
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <OnPlatform.iOS>Lato-Italic</OnPlatform.iOS>
+                                    <OnPlatform.Android>Lato-Italic.ttf#Lato-Italic</OnPlatform.Android>
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
+                    </Grid>
+               </ViewCell> 
+            </DataTemplate>
+
+            <local:NewsCellSelector 
+                OpenTemplate="{StaticResource openTemplate}" 
+                ClosedTemplate="{StaticResource closedTemplate}" 
+                x:Key="newsCellSelector" />
+        </ResourceDictionary>
+        
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="#ffffff" HeightRequest="72">
+                    <Button Image="ic_back_red.png" VerticalOptions="Center" BackgroundColor="Transparent" Clicked="Back_Clicked" Margin="15, 0, 0, 0" WidthRequest="35" HeightRequest="70"/>
+                    <Label Text="News" VerticalOptions="Center" FontSize="21" Margin="15,0,0,0" HorizontalOptions="StartAndExpand">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    <SearchBar x:Name="searchText" Placeholder="Ref. No." HorizontalOptions="End">
+                    </SearchBar>
+                    <Button Clicked="AddNew" BackgroundColor="#99C259" WidthRequest="110" HeightRequest="35" Margin="0,18,20,19" Text="Add" TextColor="White" FontSize="10" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="showAllButton" HorizontalOptions="Fill" Text="ALL" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowAll"  TextColor="#E84D3D"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barAll" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <Button x:Name="showResidentsButton"  HorizontalOptions="Fill" Text="RESIDENTS" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowResidents" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barResidents" IsVisible="false"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="showOwnerButton" HorizontalOptions="Fill" Text="OWNER" BackgroundColor="Transparent" Margin="0, 0, 0, 0" Clicked="ShowOwner" TextColor="#4a4a4a"/>
+                        <BoxView HeightRequest="5" BackgroundColor="#E84D3D" HorizontalOptions="Fill" x:Name="barOwner" IsVisible="false"/>
+                    </StackLayout>
+                </Grid>
+                <!--Filter Bar -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="30,23,30,0">
+                    <Label Text="DATE RANGE" VerticalOptions="Center" FontSize="16" TextColor="#4a4a4a" Margin="35,0,0,0">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                     
+                    <DatePicker x:Name="bookingStartDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="15,0,0,0" DateSelected="StartDate_Selected"/>
+                    <DatePicker x:Name="bookingEndDatePicker" WidthRequest="118" VerticalOptions="Center" Margin="10,0,0,0" DateSelected="EndDate_Selected"/>
+                    <Button Clicked="Clear_Filters" BackgroundColor="Transparent"  Margin="15,0,0,0" VerticalOptions="Center" Text="Clear Filters" TextColor="#E84D3D" FontSize="9" HorizontalOptions="End">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                <OnPlatform.Android>Lato-Bold.ttf#Lato-Regular</OnPlatform.Android>
+                            </OnPlatform>
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>
+                <ListView x:Name="listView"  ItemTemplate="{StaticResource newsCellSelector}" HasUnevenRows="true" ItemSelected="Handle_ItemSelected">
+                    <ListView.Header>
+                        <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                <Label Text="Image" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByInvoiceArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                <Label Text="Title" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFacilityArrow" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                <Label Text="Date" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByPeriodArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                <Label Text="Audience" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false" x:Name="SortByFeeArrow" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4" HeightRequest="29">
+                                <Label Text="Delete" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                    <Label.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String">
+                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                        </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>
+                                <Image Source="ic_dropdown_white.png" IsVisible="false"  />
+                            </StackLayout>
+                        </Grid>
+                    </ListView.Header>
+                </ListView>
+            </StackLayout>
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding Source={x:Reference NewsList}, Path=isBusy}" IsRunning="{Binding Source={x:Reference NewsList}, Path=isBusy}" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

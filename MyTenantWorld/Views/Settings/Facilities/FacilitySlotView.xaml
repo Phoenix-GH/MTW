@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="MyTenantWorld.FacilitySlotView"
+	x:Name="FacilitySlotViewPage"
+    xmlns:local="clr-namespace:MyTenantWorld;assembly=MyTenantWorld"
+    xmlns:control="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+	xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:SegmentConverter x:Key="segmentConverter"></local:SegmentConverter>
+            <local:DateConverter x:Key="dateConverter"></local:DateConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+	<ContentView.Content>
+		<StackLayout Orientation="Vertical">
+            
+			<controls:CarouselViewControl x:Name="carouselView" Position="0" Orientation="Horizontal" InterPageSpacing="10" 
+					VerticalOptions="FillAndExpand" HorizontalOptions="Fill" IsSwipingEnabled="true" ItemsSource="{Binding tFacilityTimeSlots}">
+				<controls:CarouselViewControl.ItemTemplate>
+		        		<DataTemplate>
+							<StackLayout Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="0, 30, 0, 30">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Button Image="ic_back_red.png"  WidthRequest="5" HeightRequest="13" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,60,0" BackgroundColor="Transparent" Clicked="Handle_Back"/>
+                                    <Label Text="{Binding Title}" VerticalOptions="Start" HorizontalOptions="Center" FontSize="21" TextColor="#4a4a4a">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String">
+                                                <OnPlatform.iOS>Lato-Regular</OnPlatform.iOS>
+                                                <OnPlatform.Android>Lato-Regular.ttf#Lato-Regular</OnPlatform.Android>
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
+                                    <Button Image="ic_back_red.png" WidthRequest="5" HeightRequest="13" HorizontalOptions="Center" VerticalOptions="Center" Margin="60,0,0,0" BackgroundColor="Transparent" Clicked="Handle_Next" RotationY="180"/>    
+                                </StackLayout>
+								<ListView HorizontalOptions="Fill" VerticalOptions="StartAndExpand" x:Name="facilitySlotListView" ItemsSource="{Binding obscollection}" RowHeight="71">
+                                    <ListView.Header>
+                                        <Grid HorizontalOptions="Fill" BackgroundColor="#4a4a4a" Padding="15, 0, 15, 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HeightRequest="29">
+                                                <Label Text="Prime" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HeightRequest="29">
+                                                <Label Text="Start Time" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HeightRequest="29">
+                                                <Label Text="End Time" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="3" HeightRequest="29">
+                                                <Label Text="Fee" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="4" HeightRequest="29">
+                                                <Label Text="Delete" TextColor="White" BackgroundColor="Transparent" FontSize="12" VerticalOptions="Center">
+                                                    <Label.FontFamily>
+                                                        <OnPlatform x:TypeArguments="x:String">
+                                                            <OnPlatform.iOS>Lato-Bold</OnPlatform.iOS>
+                                                            <OnPlatform.Android>Lato-Bold.ttf#Lato-Bold</OnPlatform.Android>
+                                                        </OnPlatform>
+                                                    </Label.FontFamily>
+                                                </Label>
+                                            </StackLayout>
+                                        </Grid>
+                                    </ListView.Header>
+									<ListView.ItemTemplate>
+                                        <DataTemplate>
+											<ViewCell Height="71">
+												<Grid>	
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="71" />
+                                                    </Grid.RowDefinitions>
+                                                    <control:SegmentedControl x:Name="typeSegment" HorizontalOptions="Center" HeightRequest="30" WidthRequest="210" SelectedSegment="{Binding slotType, Converter={StaticResource segmentConverter}}" TintColor="#E84D3D" BackgroundColor="White" SelectedTextColor="White" Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                                                        <control:SegmentedControl.Children>
+                                                            <control:SegmentedControlOption Text="Standard" />
+                                                            <control:SegmentedControlOption Text="Premium" />
+                                                        </control:SegmentedControl.Children>
+                                                    </control:SegmentedControl>
+													
+									        		<TimePicker x:Name="slotStartTime"  Time="{Binding startTime, Converter={StaticResource dateConverter}}" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
+													<TimePicker x:Name="slotEndTime" Time="{Binding endTime, Converter={StaticResource dateConverter}}" VerticalOptions="Center" Grid.Row="0" Grid.Column="2"/>
+													<Entry x:Name="slotFee" Placeholder="Fee" Text="{Binding slotRate, StringFormat='{0}'}" VerticalOptions="Center" Grid.Row="0" Grid.Column="3"/>
+                                                    <Button Image="ic_remove.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent" Clicked="Delete_Clicked"  CommandParameter="{Binding .}" Grid.Row="0" Grid.Column="4">
+                                                    </Button>
+												</Grid>
+											</ViewCell>
+                                        </DataTemplate>
+								    </ListView.ItemTemplate>
+								</ListView>
+							</StackLayout>
+						</DataTemplate>
+    			</controls:CarouselViewControl.ItemTemplate>
+			</controls:CarouselViewControl>
+            
+			<StackLayout Orientation="Horizontal" VerticalOptions="End" HeightRequest="62" HorizontalOptions="Center">
+				<Button HorizontalOptions="Center"  HeightRequest="50" Text="Add" Clicked="AddNewSlot"/>
+				<Button HorizontalOptions="Center" HeightRequest="50" Text="Clone" Clicked="Clone"/>
+			</StackLayout>
+		</StackLayout>
+	</ContentView.Content>
+</ContentView>
